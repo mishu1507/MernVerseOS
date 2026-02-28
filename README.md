@@ -44,5 +44,5 @@ Users don't just write code — they **operate a system**.
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/MernVerseOS.git
+git clone https://github.com/mishu1507/MernVerseOS.git
 cd MernVerseOS
