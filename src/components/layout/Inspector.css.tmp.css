@@ -1,0 +1,11 @@
+.inspector__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px;
+    min-height: 0;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    height: 100%;
+    /* Force height constraint */
+}

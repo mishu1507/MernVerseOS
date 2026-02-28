@@ -1,0 +1,324 @@
+/* ========================================
+   Inspector — Premium Cartoon
+   ======================================== */
+
+.inspector {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.inspector__header {
+    padding: 12px 16px;
+    border-bottom: 4px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inspector__title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.inspector__tabs {
+    display: flex;
+    background: var(--bg-primary);
+    padding: 4px;
+    border-radius: 12px;
+    border: 3px solid var(--border);
+}
+
+.inspector__tab {
+    flex: 1;
+    padding: 6px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: var(--text-tertiary);
+    cursor: pointer;
+}
+
+.inspector__tab--active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 2px 2px 0px var(--border);
+}
+
+.inspector__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px;
+    min-height: 0;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    /* Simplest scroll layout: block items */
+}
+
+.inspector__section {
+    margin-bottom: 24px;
+}
+
+.inspector__section-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+}
+
+/* Stack & Items */
+.inspector__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inspector__stack-item {
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-primary);
+    box-shadow: 3px 3px 0px var(--border);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+.inspector__stack-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--border);
+}
+
+.inspector__stack-item--active {
+    background: var(--accent);
+}
+
+.inspector__queue {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.inspector__queue-item {
+    padding: 6px 12px;
+    background: var(--teal);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 2px 2px 0px var(--border);
+}
+
+/* Metrics */
+.inspector__metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+}
+
+.inspector__metric-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+}
+
+.inspector__metric-value {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.inspector__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+    text-align: center;
+    padding: 20px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+
+/* ========================================
+   Learning Story — Kid Friendly
+   ======================================== */
+
+.learning-story {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 8px;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.learning-story__header {
+    background: var(--purple, #a855f7);
+    padding: 16px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.learning-story__icon {
+    font-size: 32px;
+}
+
+.learning-story__title {
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+}
+
+.learning-story__section {
+    background: var(--bg-card);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+}
+
+.learning-story__section-title {
+    display: block;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.learning-story__content {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 500;
+}
+
+.learning-story__analogy {
+    background: var(--yellow, #facc15);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+}
+
+.learning-story__analogy .learning-story__section-title {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.learning-story__analogy-text {
+    font-size: 15px;
+    font-weight: 800;
+    color: #443300;
+    margin: 0;
+    font-style: italic;
+}
+
+.learning-story__simulator {
+    background: linear-gradient(135deg, var(--teal), #2dd4bf);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    animation: secretPulse 3s infinite ease-in-out;
+}
+
+@keyframes secretPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--border);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 8px 8px 15px rgba(45, 212, 191, 0.3), 6px 6px 0px var(--border);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--border);
+    }
+}
+
+.learning-story__simulator::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transform: rotate(45deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.learning-story__look-for {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.learning-story__look-icon {
+    font-size: 24px;
+    line-height: 1;
+}

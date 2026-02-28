@@ -1,0 +1,65 @@
+/* ========================================
+   App — Main application layout
+   ======================================== */
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-primary);
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.app__body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.app__center {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.app__canvas-wrapper {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ========================================
+   Resize Bars — Clean Cartoon Dividers
+   ======================================== */
+
+.resize-bar {
+    background: var(--border);
+    flex-shrink: 0;
+    transition: background 0.1s;
+    z-index: 50;
+}
+
+.resize-bar:hover,
+.resize-bar:active {
+    background: var(--accent);
+}
+
+.resize-bar--vertical {
+    width: 4px;
+    cursor: col-resize;
+}
+
+.resize-bar--horizontal {
+    height: 4px;
+    cursor: ns-resize;
+}

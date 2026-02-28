@@ -1,0 +1,192 @@
+/* ========================================
+   SimCanvas — Premium Cartoon Engine
+   ======================================== */
+
+.sim-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: var(--bg-secondary);
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+}
+
+.sim-canvas.is-dragging {
+    cursor: grabbing;
+}
+
+.sim-canvas__grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.sim-canvas__viewport {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+
+.sim-canvas__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.sim-canvas__svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    overflow: visible;
+}
+
+/* ─── Connection Lines ─── */
+
+.connection-line {
+    stroke: var(--border);
+    stroke-width: 4;
+    stroke-dasharray: 10 8;
+    fill: none;
+    opacity: 0.3;
+    transition: opacity 0.3s var(--ease);
+}
+
+.connection-line--running {
+    opacity: 1;
+    animation: dash-flow 1.5s linear infinite;
+}
+
+.connection-line--active {
+    stroke: var(--accent);
+    stroke-width: 6;
+    opacity: 1;
+    stroke-dasharray: none;
+    filter: drop-shadow(0 0 8px rgba(255, 211, 42, 0.4));
+}
+
+.connection-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 900;
+    fill: var(--text-primary);
+    paint-order: stroke;
+    stroke: var(--bg-secondary);
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ─── System Nodes ─── */
+
+.system-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.2s var(--ease-bounce);
+}
+
+.system-node:hover {
+    transform: scale(1.1);
+}
+
+.system-node__box {
+    width: 72px;
+    height: 72px;
+    background: var(--bg-card);
+    border: 4px solid var(--border);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 6px 6px 0px var(--border);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+[data-theme="dark"] .system-node__box {
+    border-color: #444;
+    /* Slightly lighter than the structural frame for contrast */
+    box-shadow: 4px 4px 0px #222;
+}
+
+.system-node--active .system-node__box {
+    background: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px var(--border);
+}
+
+[data-theme="dark"] .system-node--active .system-node__box {
+    box-shadow: 0 0 15px rgba(255, 211, 42, 0.4);
+    border-color: var(--accent);
+}
+
+.system-node__label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    padding: 2px 8px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--border);
+}
+
+/* ─── Packets ─── */
+
+.packet-dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    z-index: 30;
+    pointer-events: none;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.packet-dot--http {
+    background: var(--node-client);
+}
+
+.packet-dot--db {
+    background: var(--node-database);
+}
+
+.packet-dot--ws {
+    background: var(--teal);
+}
+
+.packet-dot__label {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    padding: 2px 8px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 2px 2px 0px var(--border);
+}
