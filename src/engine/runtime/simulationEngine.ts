@@ -33,8 +33,8 @@ export class SimulationEngine {
     private listeners: Set<SimulationListener> = new Set();
     private initialModuleConfig: ModuleConfig | null = null;
 
-    // Why Mode
-    private whyModeEnabled = false;
+    // Why Mode - Enabled by default as requested
+    private whyModeEnabled = true;
     private whyModePrompt: WhyModePrompt | null = null;
     private whyModePrompts: WhyModePrompt[] = [];
     private whyModePromptIndex = 0;

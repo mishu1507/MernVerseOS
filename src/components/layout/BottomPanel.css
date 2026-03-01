@@ -117,3 +117,14 @@
 .log-line--reasoning .log-line__message {
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+    .bottom-panel__tab {
+        padding: 10px 8px;
+        font-size: 10px;
+    }
+
+    .bottom-panel__tab-count {
+        display: none;
+    }
+}

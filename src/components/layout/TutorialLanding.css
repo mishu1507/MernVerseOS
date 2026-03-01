@@ -371,3 +371,76 @@
     transform: translateY(2px);
     box-shadow: 1px 1px 0px var(--border);
 }
+
+/* Responsive Adjustments for Landing */
+@media (max-width: 1024px) {
+    .landing-hero {
+        padding: 40px 50px;
+    }
+
+    .landing-title {
+        font-size: 56px;
+    }
+}
+
+@media (max-width: 768px) {
+    .landing-hero {
+        padding: 30px 20px;
+        width: 90%;
+        border-width: 3px;
+    }
+
+    .landing-title {
+        font-size: 42px;
+        gap: 8px;
+    }
+
+    .landing-logo-mark {
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
+    }
+
+    .os-badge {
+        font-size: 20px;
+        padding: 2px 10px;
+    }
+
+    .landing-subtitle {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .landing-features {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 40px;
+    }
+
+    .feature-pill {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .landing-enter-btn {
+        padding: 16px 32px;
+        font-size: 16px;
+    }
+
+    .tutorial-modal {
+        padding: 20px;
+    }
+
+    .tutorial-modal-icon {
+        font-size: 50px;
+    }
+
+    .tutorial-modal h2 {
+        font-size: 24px;
+    }
+
+    .tutorial-modal p {
+        font-size: 14px;
+    }
+}

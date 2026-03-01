@@ -26,7 +26,7 @@ const nodes: SystemNode[] = [
     {
         id: "state",
         name: "React Re-renders",
-        icon: "⚛",
+        icon: "⚛️",
         category: "client",
         runtime: "reactive",
         position: { x: 600, y: 150 },

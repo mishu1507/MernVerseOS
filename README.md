@@ -46,3 +46,4 @@ Clone the repository:
 ```bash
 git clone https://github.com/mishu1507/MernVerseOS.git
 cd MernVerseOS
+npm run dev

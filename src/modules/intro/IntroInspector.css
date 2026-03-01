@@ -1,3 +1,16 @@
+.inspector-panel h3,
+.inspector-panel h4 {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.inspector-text {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
 .concept-list {
     display: flex;
     flex-direction: column;
@@ -8,10 +21,10 @@
 .concept-item {
     display: flex;
     gap: 12px;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-secondary);
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-light);
 }
 
 .concept-icon {
@@ -20,13 +33,13 @@
 
 .concept-content h5 {
     margin: 0 0 4px 0;
-    color: #fff;
+    color: var(--text-primary);
     font-size: 14px;
 }
 
 .concept-content p {
     margin: 0;
     font-size: 13px;
-    color: #aaa;
+    color: var(--text-secondary);
     line-height: 1.4;
 }

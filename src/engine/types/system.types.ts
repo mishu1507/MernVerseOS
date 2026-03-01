@@ -20,7 +20,9 @@ export type ProtocolType =
     | "http"
     | "db-query"
     | "websocket"
-    | "queue";
+    | "queue"
+    | "internal"
+    | "dom-event";
 
 export type PacketStatus =
     | "pending"

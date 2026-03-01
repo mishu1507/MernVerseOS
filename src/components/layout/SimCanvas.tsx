@@ -16,9 +16,14 @@ function getProtocolClass(protocol: string): string {
     }
 }
 
-export default function SimCanvas() {
-    const { snapshot } = useStore();
-    const { nodes, connections, packets, status } = snapshot;
+interface SimCanvasProps {
+    isFullScreen?: boolean;
+    onToggleFullScreen?: () => void;
+}
+
+export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanvasProps) {
+    const { snapshot, play, pause, step, reset, setSpeed } = useStore();
+    const { nodes, connections, packets, status, speed } = snapshot;
     const isRunning = status === 'running';
 
     const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -142,6 +147,43 @@ export default function SimCanvas() {
                     })}
                 </div>
             </div>
+
+            {/* ─── Floating Controls Overlay (Only in Fullscreen) ─── */}
+            {isFullScreen && (
+                <div className="sim-controls">
+                    <div className="sim-controls__group">
+                        <button className="sim-controls__btn" onClick={reset} title="Reset">↻</button>
+                        <button className="sim-controls__btn sim-controls__btn--play" onClick={isRunning ? pause : play} title={isRunning ? 'Pause' : 'Play'}>
+                            {isRunning ? '⏸' : '▶'}
+                        </button>
+                        <button className="sim-controls__btn" onClick={step} title="Step Forward">⏭</button>
+                    </div>
+
+                    <div className="sim-controls__separator" />
+
+                    <div className="sim-controls__group">
+                        {[0.5, 1, 2, 4].map(s => (
+                            <button
+                                key={s}
+                                className={`sim-controls__speed-btn ${speed === s ? 'is-active' : ''}`}
+                                onClick={() => setSpeed(s)}
+                            >
+                                {s}x
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="sim-controls__separator" />
+
+                    <button
+                        className={`sim-controls__btn sim-controls__btn--fullscreen ${isFullScreen ? 'is-active' : ''}`}
+                        onClick={onToggleFullScreen}
+                        title={isFullScreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+                    >
+                        {isFullScreen ? '⤓' : '⤢'}
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

@@ -37,7 +37,7 @@ export default function StrugglesInspector() {
                         </div>
                     </div>
                     <div className="concept-item">
-                        <span className="concept-icon">⚛</span>
+                        <span className="concept-icon">⚛️</span>
                         <div className="concept-content">
                             <h5>Infinite Re-renders</h5>
                             <p>Modifying state during the wrong lifecycle phases.</p>

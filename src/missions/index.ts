@@ -322,6 +322,188 @@ export const MISSION_REACT_LOOP: Mission = {
     },
 };
 
+// ---- Mission 6: CORS Hell ----
+
+export const MISSION_CORS_ERROR: Mission = {
+    id: 'cors-error',
+    title: 'Frontend blocked by CORS policy.',
+    description: 'The frontend app works on localhost but fails completely when deployed to production.',
+    briefing: 'Your React frontend (running on https://app.mernverse.com) is trying to fetch data from your Express API (running on https://api.mernverse.com). The browser is blocking the request and throwing a CORS error.',
+    difficulty: 'beginner',
+    moduleId: 'express',
+    category: 'Security',
+    hints: [
+        'Notice how the request never even makes it to the controller. The browser intercepts it.',
+        'When the origins (domain/port) differ, browsers send an OPTIONS "preflight" request.',
+        'The server must explicitly tell the browser "Yes, app.mernverse.com is allowed to read this data."',
+    ],
+    whatWentWrong: 'Cross-Origin Resource Sharing (CORS) is a browser security feature. The server did not include the `Access-Control-Allow-Origin` header in its response, so the browser refused to hand the data to the React app.',
+    howToFix: 'Install the `cors` middleware in Express and configure it to accept requests from your frontend domain: `app.use(cors({ origin: "https://app.mernverse.com" }))`.',
+    successExplanation: 'CORS protects users from malicious websites making unauthorized requests to APIs on their behalf. To fix it, the API must explicitly whitelist allowed client origins using headers.',
+    solutionOptions: [
+        { label: 'Add CORS middleware to the Express server.', isCorrect: true, feedback: 'Correct. The server dictates who can read its responses using CORS headers.' },
+        { label: 'Disable web security in the browser.', isCorrect: false, feedback: 'That works for local testing, but you can\'t tell all your users to disable their browser security!' },
+        { label: 'Change the React code to bypass CORS.', isCorrect: false, feedback: 'You cannot bypass CORS from the frontend. It is strictly enforced by the browser based on server headers.' }
+    ],
+    brokenConfig: {
+        moduleId: 'express',
+        nodes: [
+            { id: 'browser', name: 'Browser Security', icon: '🛡️', category: 'middleware', runtime: 'blocking', position: { x: 200, y: 180 }, state: 'idle', metadata: {}, explanation: 'Browser detects cross-origin request. Sends OPTIONS preflight.' },
+            { id: 'server', name: 'API Server', icon: '⚙️', category: 'service', runtime: 'event-loop', position: { x: 500, y: 180 }, state: 'idle', metadata: {}, explanation: 'Server receives OPTIONS, but lacks CORS middleware to respond correctly.' },
+            { id: 'react', name: 'React App', icon: '⚛️', category: 'client', runtime: 'reactive', position: { x: 200, y: 300 }, state: 'idle', metadata: {}, explanation: '⚠️ Fetch fails. Data blocked by browser.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'browser', target: 'server', protocol: 'http', latency: 20, reason: 'Sending OPTIONS preflight.' },
+            { id: 'c2', source: 'server', target: 'browser', protocol: 'http', latency: 20, reason: 'No CORS headers returned.' },
+            { id: 'c3', source: 'browser', target: 'react', protocol: 'internal', latency: 5, reason: '⚠️ Throws CORS Error. Request blocked.' }
+        ],
+        initialPackets: [
+            { id: 'pkt_cors', protocol: 'http', payload: 'OPTIONS /api/data', label: 'Preflight', currentNodeId: 'browser', sourceNodeId: 'browser', targetNodeId: 'server', path: ['browser'], progress: 0, status: 'pending', createdAt: Date.now() }
+        ]
+    },
+    fixedConfig: {
+        moduleId: 'express',
+        nodes: [
+            { id: 'browser', name: 'Browser Security', icon: '🛡️', category: 'middleware', runtime: 'blocking', position: { x: 200, y: 180 }, state: 'idle', metadata: {}, explanation: 'Browser detects cross-origin request. Sends OPTIONS preflight.' },
+            { id: 'server', name: 'API Server (CORS)', icon: '✅', category: 'service', runtime: 'event-loop', position: { x: 500, y: 180 }, state: 'idle', metadata: {}, explanation: '✅ CORS middleware intercepts OPTIONS and returns Access-Control-Allow-Origin.' },
+            { id: 'react', name: 'React App', icon: '⚛️', category: 'client', runtime: 'reactive', position: { x: 200, y: 300 }, state: 'idle', metadata: {}, explanation: '✅ Browser allows the actual GET request to proceed.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'browser', target: 'server', protocol: 'http', latency: 20, reason: 'Sending OPTIONS preflight.' },
+            { id: 'c2', source: 'server', target: 'browser', protocol: 'http', latency: 20, reason: '✅ Returns proper CORS headers.' },
+            { id: 'c3', source: 'browser', target: 'server', protocol: 'http', latency: 20, reason: '✅ Sends actual GET request.' },
+            { id: 'c4', source: 'server', target: 'react', protocol: 'http', latency: 20, reason: '✅ Data delivered successfully.' }
+        ],
+        initialPackets: [
+            { id: 'pkt_cors', protocol: 'http', payload: 'OPTIONS /api/data', label: 'Preflight', currentNodeId: 'browser', sourceNodeId: 'browser', targetNodeId: 'server', path: ['browser'], progress: 0, status: 'pending', createdAt: Date.now() }
+        ]
+    }
+};
+
+// ---- Mission 7: Memory Leak ----
+
+export const MISSION_MEMORY_LEAK: Mission = {
+    id: 'memory-leak',
+    title: 'Server crashes with Heap Out Of Memory.',
+    description: 'The Node.js server consumes more RAM every hour until it inevitably crashes and restarts.',
+    briefing: 'A memory leak occurs when a program continuously allocates memory but never releases it. The Garbage Collector cannot clean it up because the app still holds a reference to the data.',
+    difficulty: 'advanced',
+    moduleId: 'node',
+    category: 'Performance',
+    hints: [
+        'Watch the Memory Heap node. It fills up until the entire runtime crashes.',
+        'Look at how the caching logic is implemented. Are items ever removed?',
+        'Global arrays or object maps that grow indefinitely are the most common cause.'
+    ],
+    whatWentWrong: 'The app stores session data in a global JavaScript array. Because the objects are constantly appended and never deleted (even after users log out), the Garbage Collector cannot reclaim the memory.',
+    howToFix: 'Use a proper caching mechanism with Expiration/TTL (Time To Live), like Redis, or ensure you explicitly delete keys from the global object when sessions end.',
+    successExplanation: 'Unlike languages where memory is manually freed, Node uses Garbage Collection. But if you hold a reference (like putting data in a global array), the GC assumes you still need it. Always bound your caches.',
+    solutionOptions: [
+        { label: 'Use Redis or bounded LRU cache instead of a global array.', isCorrect: true, feedback: 'Correct! An external data store or a bounded cache prevents the V8 heap from growing infinitely.' },
+        { label: 'Increase Node memory limit (--max-old-space-size).', isCorrect: false, feedback: 'This only delays the inevitable crash; it does not solve the leak.' },
+        { label: 'Call global.gc() manually inside a timer.', isCorrect: false, feedback: 'Forcing GC is highly discouraged and will severely degrade performance. Plus, it won\'t clear referenced memory.' }
+    ],
+    brokenConfig: {
+        moduleId: 'node',
+        nodes: [
+            { id: 'req', name: 'Traffic', icon: '🌍', category: 'client', runtime: 'event-loop', position: { x: 100, y: 180 }, state: 'idle', metadata: {}, explanation: 'Continuous inbound traffic.' },
+            { id: 'server', name: 'Node.js Process', icon: '🟢', category: 'service', runtime: 'event-loop', position: { x: 400, y: 180 }, state: 'idle', metadata: {}, explanation: 'Processing requests and storing session stats globally.' },
+            { id: 'heap', name: 'V8 Memory Heap', icon: '🪣', category: 'database', runtime: 'blocking', position: { x: 700, y: 180 }, state: 'idle', metadata: {}, explanation: '⚠️ Caches data globally. Fills up infinitely.' },
+            { id: 'crash', name: 'Fatal Error', icon: '💥', category: 'middleware', runtime: 'blocking', position: { x: 700, y: 300 }, state: 'idle', metadata: {}, explanation: '⚠️ FATAL ERROR: JavaScript heap out of memory.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'req', target: 'server', protocol: 'http', latency: 10, reason: 'Inbound requests.' },
+            { id: 'c2', source: 'server', target: 'heap', protocol: 'internal', latency: 5, reason: '⚠️ Appending indefinitely to global memory cache.' },
+            { id: 'c3', source: 'heap', target: 'crash', protocol: 'internal', latency: 10, reason: '⚠️ Heap limit exceeded. Process dies.' }
+        ],
+        initialPackets: [
+            { id: 'pkt_leak', protocol: 'http', payload: 'req.session', label: 'User Data', currentNodeId: 'req', sourceNodeId: 'req', targetNodeId: 'server', path: ['req'], progress: 0, status: 'pending', createdAt: Date.now() }
+        ]
+    },
+    fixedConfig: {
+        moduleId: 'node',
+        nodes: [
+            { id: 'req', name: 'Traffic', icon: '🌍', category: 'client', runtime: 'event-loop', position: { x: 100, y: 180 }, state: 'idle', metadata: {}, explanation: 'Continuous inbound traffic.' },
+            { id: 'server', name: 'Node.js Process', icon: '🟢', category: 'service', runtime: 'event-loop', position: { x: 400, y: 180 }, state: 'idle', metadata: {}, explanation: 'Validates and fetches sessions externally or uses bounds.' },
+            { id: 'redis', name: 'Redis Cache (TTL)', icon: '🟥', category: 'database', runtime: 'reactive', position: { x: 700, y: 180 }, state: 'idle', metadata: {}, explanation: '✅ Redis manages memory and evicts expired keys automatically.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'req', target: 'server', protocol: 'http', latency: 10, reason: 'Inbound requests.' },
+            { id: 'c2', source: 'server', target: 'redis', protocol: 'db-query', latency: 5, reason: '✅ Data stored in Redis with an expiration time.' },
+            { id: 'c3', source: 'redis', target: 'server', protocol: 'db-query', latency: 5, reason: '✅ Safe retrieval. V8 Memory remains perfectly stable.' }
+        ],
+        initialPackets: [
+            { id: 'pkt_leak', protocol: 'http', payload: 'req.session', label: 'User Data', currentNodeId: 'req', sourceNodeId: 'req', targetNodeId: 'server', path: ['req'], progress: 0, status: 'pending', createdAt: Date.now() }
+        ]
+    }
+};
+
+// ---- Mission 8: Race Condition ----
+
+export const MISSION_RACE_CONDITION: Mission = {
+    id: 'race-condition',
+    title: 'React State Race Condition.',
+    description: 'When users click "Next Page" very fast, the UI sometimes displays the wrong page\'s data.',
+    briefing: 'A race condition happens when asynchronous operations complete in an unpredictable order. When rapidly fetching page 2 then page 3, if page 2\'s API is slow, its response might arrive AFTER page 3\'s response, corrupting the UI.',
+    difficulty: 'intermediate',
+    moduleId: 'react',
+    category: 'UI/UX',
+    hints: [
+        'Watch the packet progress. Fetch(Page 2) takes 3 seconds. Fetch(Page 3) takes 1 second.',
+        'Page 3 state is applied first. Then Page 2 arrives late and overwrites it.',
+        'React effects need a way to "cancel" or ignore responses if the component has moved on.'
+    ],
+    whatWentWrong: 'The component state is overwritten by a stale, delayed asynchronous request that completed out of order. There is no cleanup function ignoring outdated promises.',
+    howToFix: 'Inside the useEffect, use a boolean flag (let ignore = false) and a cleanup function (return () => { ignore = true }). Only call setState if ignore is still false.',
+    successExplanation: 'Network latency is unpredictable. Always write defensive React hooks that discard asynchronous responses if the component props/state have already updated again before the response arrived.',
+    solutionOptions: [
+        { label: 'Use an ignore flag in useEffect cleanup to discard stale responses.', isCorrect: true, feedback: 'Exactly. This prevents delayed API responses from overwriting newer state.' },
+        { label: 'Disable the button until the request finishes.', isCorrect: false, feedback: 'This helps UI spam, but relying only on UI disables is weak defense if network connections cross wires.' },
+        { label: 'Switch to a synchronous XHR request.', isCorrect: false, feedback: 'Never do this. It will completely freeze the browser tab while waiting.' }
+    ],
+    brokenConfig: {
+        moduleId: 'react',
+        nodes: [
+            { id: 'ui', name: 'Pagination UI', icon: '📱', category: 'client', runtime: 'reactive', position: { x: 100, y: 180 }, state: 'idle', metadata: {}, explanation: 'User rapidly clicks: Page 2, then Page 3.' },
+            { id: 'api2', name: 'API (Page 2)', icon: '🐌', category: 'service', runtime: 'event-loop', position: { x: 400, y: 100 }, state: 'idle', metadata: {}, explanation: '⚠️ This request is very slow. Takes longer than Page 3.' },
+            { id: 'api3', name: 'API (Page 3)', icon: '🚀', category: 'service', runtime: 'event-loop', position: { x: 400, y: 260 }, state: 'idle', metadata: {}, explanation: 'This request resolves extremely fast.' },
+            { id: 'state', name: 'React State', icon: '💾', category: 'database', runtime: 'reactive', position: { x: 700, y: 180 }, state: 'idle', metadata: {}, explanation: '⚠️ Receives Page 3, then gets overwritten by the delayed Page 2.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'ui', target: 'api2', protocol: 'http', latency: 10, reason: 'Fetch Page 2 sent.' },
+            { id: 'c2', source: 'ui', target: 'api3', protocol: 'http', latency: 10, reason: 'Fetch Page 3 sent right after.' },
+            { id: 'c3', source: 'api3', target: 'state', protocol: 'http', latency: 50, reason: 'Page 3 data arrives fast. UI shows Page 3.' },
+            { id: 'c4', source: 'api2', target: 'state', protocol: 'http', latency: 200, reason: '⚠️ Page 2 data arrives super late and OVERWRITES Page 3 UI!' }
+        ],
+        initialPackets: [
+            { id: 'pkt_r1', protocol: 'dom-event', payload: 'Click Page 2', label: 'Slow Req', currentNodeId: 'ui', sourceNodeId: 'ui', targetNodeId: 'api2', path: ['ui'], progress: 0, status: 'pending', createdAt: Date.now() },
+            { id: 'pkt_r2', protocol: 'dom-event', payload: 'Click Page 3', label: 'Fast Req', currentNodeId: 'ui', sourceNodeId: 'ui', targetNodeId: 'api3', path: ['ui'], progress: 0, status: 'pending', createdAt: Date.now() + 500 }
+        ]
+    },
+    fixedConfig: {
+        moduleId: 'react',
+        nodes: [
+            { id: 'ui', name: 'Pagination UI', icon: '📱', category: 'client', runtime: 'reactive', position: { x: 100, y: 180 }, state: 'idle', metadata: {}, explanation: 'User clicks Page 2, then Page 3.' },
+            { id: 'api2', name: 'API (Page 2)', icon: '🐌', category: 'service', runtime: 'event-loop', position: { x: 400, y: 100 }, state: 'idle', metadata: {}, explanation: 'Slow request.' },
+            { id: 'api3', name: 'API (Page 3)', icon: '🚀', category: 'service', runtime: 'event-loop', position: { x: 400, y: 260 }, state: 'idle', metadata: {}, explanation: 'Fast request.' },
+            { id: 'effect', name: 'useEffect Cleanup', icon: '🧹', category: 'middleware', runtime: 'blocking', position: { x: 600, y: 180 }, state: 'idle', metadata: {}, explanation: '✅ Cleanup flag ignores requests from older updates.' },
+            { id: 'state', name: 'React State', icon: '💾', category: 'database', runtime: 'reactive', position: { x: 800, y: 180 }, state: 'idle', metadata: {}, explanation: '✅ Stays safely on Page 3.' }
+        ],
+        connections: [
+            { id: 'c1', source: 'ui', target: 'api2', protocol: 'http', latency: 10, reason: 'Fetch Page 2 sent. Cleanup flag created.' },
+            { id: 'c2', source: 'ui', target: 'api3', protocol: 'http', latency: 10, reason: 'Fetch Page 3 sent. PAGE 2 FLAG SET TO IGNORE.' },
+            { id: 'c3', source: 'api3', target: 'effect', protocol: 'http', latency: 50, reason: 'Page 3 arrives. Flag is valid.' },
+            { id: 'c4', source: 'effect', target: 'state', protocol: 'http', latency: 10, reason: '✅ Update state to Page 3.' },
+            { id: 'c5', source: 'api2', target: 'effect', protocol: 'http', latency: 200, reason: 'Page 2 arrives super late.' },
+            { id: 'c6', source: 'effect', target: 'effect', protocol: 'internal', latency: 10, reason: '✅ PAGE 2 IGNORED. Does not reach state.' }
+        ],
+        initialPackets: [
+            { id: 'pkt_r1', protocol: 'dom-event', payload: 'Click Page 2', label: 'Slow Req', currentNodeId: 'ui', sourceNodeId: 'ui', targetNodeId: 'api2', path: ['ui'], progress: 0, status: 'pending', createdAt: Date.now() },
+            { id: 'pkt_r2', protocol: 'dom-event', payload: 'Click Page 3', label: 'Fast Req', currentNodeId: 'ui', sourceNodeId: 'ui', targetNodeId: 'api3', path: ['ui'], progress: 0, status: 'pending', createdAt: Date.now() + 500 }
+        ]
+    }
+};
+
 // ---- Export All Missions ----
 
 export const ALL_MISSIONS: Mission[] = [
@@ -330,4 +512,7 @@ export const ALL_MISSIONS: Mission[] = [
     MISSION_MONGO_FULL_SCAN,
     MISSION_EVENT_LOOP_BLOCKED,
     MISSION_REACT_LOOP,
+    MISSION_CORS_ERROR,
+    MISSION_MEMORY_LEAK,
+    MISSION_RACE_CONDITION,
 ];

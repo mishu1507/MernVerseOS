@@ -1,7 +1,8 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { SimulationProvider, useStore } from './store/simulationStore';
-import TopNav from './components/layout/TopNav';
+import TopNav, { MODULE_LABELS } from './components/layout/TopNav';
 import Sidebar from './components/layout/Sidebar';
+import { CONTENT_BANK } from './modules/contentBank';
 import SimCanvas from './components/layout/SimCanvas';
 import Inspector from './components/layout/Inspector';
 import BottomPanel from './components/layout/BottomPanel';
@@ -20,6 +21,8 @@ import { getGraphQLModuleConfig } from './modules/graphql/graphqlModule';
 import { getIndexingModuleConfig } from './modules/indexing/indexingModule';
 import { getIntroModuleConfig } from './modules/intro/introModule';
 import { getStrugglesModuleConfig } from './modules/struggles/strugglesModule';
+import { getWipModuleConfig } from './modules/wip/wipModule';
+import { getFullJourneyModuleConfig } from './modules/fullJourney/fullJourneyModule';
 import './App.css';
 
 type ModuleConfigFn = () => ReturnType<typeof getEventLoopModuleConfig>;
@@ -83,11 +86,26 @@ function AppContent() {
     const [showMissions, setShowMissions] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [tutorialCompleted, setTutorialCompleted] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
     const { loadModule } = useStore();
 
     // Resize hooks
     const rightPanel = useResize('x', 400, 280, 800, true);   // Inspector width (drag left = bigger)
     const bottomPanel = useResize('y', 220, 100, 500, true);   // Bottom panel height (drag up = bigger)
+
+    // Responsive effect: close sidebar on mobile by default
+    useEffect(() => {
+        const checkMobile = () => {
+            if (window.innerWidth < 1024) {
+                setIsSidebarOpen(false);
+            } else {
+                setIsSidebarOpen(true);
+            }
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Start in light mode
     useState(() => {
@@ -104,14 +122,24 @@ function AppContent() {
 
     const handleModuleSelect = useCallback((moduleId: string) => {
         setShowMissions(false);
+        // On mobile, close sidebar after selection
+        if (window.innerWidth < 1024) {
+            setIsSidebarOpen(false);
+        }
         const configFn = MODULE_CONFIGS[moduleId];
         if (configFn) {
             loadModule(configFn());
+        } else {
+            const content = CONTENT_BANK[moduleId] || { title: MODULE_LABELS[moduleId] || moduleId };
+            loadModule(getWipModuleConfig(moduleId, content));
         }
     }, [loadModule]);
 
     const handleMissionsClick = useCallback(() => {
         setShowMissions(true);
+        if (window.innerWidth < 1024) {
+            setIsSidebarOpen(false);
+        }
     }, []);
 
     if (!tutorialCompleted) {
@@ -119,11 +147,14 @@ function AppContent() {
     }
 
     return (
-        <div className="app">
+        <div className={`app ${isFullScreen ? 'app--fullscreen' : ''}`}>
             <TopNav
                 onToggleTheme={handleToggleTheme}
                 theme={theme}
                 onToggleSidebar={() => setIsSidebarOpen(prev => !prev)}
+                onSimulateRequest={() => handleModuleSelect('full-journey')}
+                isFullScreen={isFullScreen}
+                onToggleFullScreen={() => setIsFullScreen(!isFullScreen)}
             />
             <div className="app__body">
                 {isSidebarOpen && (
@@ -136,22 +167,30 @@ function AppContent() {
                 )}
                 <div className="app__center">
                     <div className="app__canvas-wrapper">
-                        <SimCanvas />
+                        <SimCanvas isFullScreen={isFullScreen} onToggleFullScreen={() => setIsFullScreen(!isFullScreen)} />
                         <WhyModeOverlay />
                     </div>
                     {/* ─── Horizontal resize bar (bottom panel) ─── */}
-                    <div className="resize-bar resize-bar--horizontal" onMouseDown={bottomPanel.onMouseDown}>
-                        <div className="resize-bar__grip" />
-                    </div>
-                    <BottomPanel height={bottomPanel.size} />
+                    {!isFullScreen && (
+                        <>
+                            <div className="resize-bar resize-bar--horizontal" onMouseDown={bottomPanel.onMouseDown}>
+                                <div className="resize-bar__grip" />
+                            </div>
+                            <BottomPanel height={bottomPanel.size} />
+                        </>
+                    )}
                 </div>
                 {/* ─── Vertical resize bar (right panel) ─── */}
-                <div className="resize-bar resize-bar--vertical" onMouseDown={rightPanel.onMouseDown}>
-                    <div className="resize-bar__grip" />
-                </div>
-                <div style={{ width: rightPanel.size, flexShrink: 0 }}>
-                    {showMissions ? <MissionPanel /> : <Inspector />}
-                </div>
+                {!isFullScreen && (
+                    <>
+                        <div className="resize-bar resize-bar--vertical" onMouseDown={rightPanel.onMouseDown}>
+                            <div className="resize-bar__grip" />
+                        </div>
+                        <div className="app__right-panel" style={{ width: rightPanel.size, flexShrink: 0 }}>
+                            {showMissions ? <MissionPanel /> : <Inspector />}
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

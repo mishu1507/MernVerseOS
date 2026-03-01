@@ -11,6 +11,8 @@ import MicroservicesInspector from '../../modules/microservices/MicroservicesIns
 import GraphQLInspector from '../../modules/graphql/GraphQLInspector';
 import IntroInspector from '../../modules/intro/IntroInspector';
 import StrugglesInspector from '../../modules/struggles/StrugglesInspector';
+import FullJourneyInspector from '../../modules/fullJourney/FullJourneyInspector';
+import WipInspector from '../../modules/wip/WipInspector';
 import './Inspector.css';
 
 const INSPECTORS: Record<string, React.ComponentType> = {
@@ -28,13 +30,15 @@ const INSPECTORS: Record<string, React.ComponentType> = {
     'caching': CachingInspector,
     'microservices': MicroservicesInspector,
     'graphql': GraphQLInspector,
+    'full-journey': FullJourneyInspector,
 };
+
 
 export default function Inspector() {
     const { snapshot } = useStore();
     const [activeTab, setActiveTab] = React.useState<'specs' | 'story'>('specs');
 
-    const ModuleInspector = snapshot.activeModule ? INSPECTORS[snapshot.activeModule] : undefined;
+    const ModuleInspector = snapshot.activeModule ? (INSPECTORS[snapshot.activeModule] || WipInspector) : undefined;
     const story = snapshot.learningStory;
 
     return (
