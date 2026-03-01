@@ -20,28 +20,20 @@ export default function BottomPanel({ height = 220 }: BottomPanelProps) {
     const handleScroll = () => {
         if (scrollRef.current) {
             const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
-            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
-            setIsScrolledUp(!isNearBottom && scrollHeight > clientHeight);
+            // Precise check: If we are within 20px of the bottom, we consider it "at the bottom"
+            const atBottom = scrollHeight - scrollTop - clientHeight < 20;
+
+            // Only update state if it actually changed to prevent unnecessary re-renders
+            setIsScrolledUp(!atBottom);
         }
     };
 
-    // Auto-scroll logic
+    // Auto-scroll logic: only snaps to bottom if the user hasn't manually scrolled up
     useEffect(() => {
-        if (!scrollRef.current) return;
-        const el = scrollRef.current;
-
-        const frame = requestAnimationFrame(() => {
-            const { scrollTop, scrollHeight, clientHeight } = el;
-            const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
-            const isCurrentlyEmpty = scrollHeight <= clientHeight;
-
-            if (isNearBottom || isCurrentlyEmpty) {
-                el.scrollTop = el.scrollHeight;
-            }
-        });
-
-        return () => cancelAnimationFrame(frame);
-    }, [snapshot.consoleLogs.length, snapshot.timeline.length, snapshot.packets.length, activeTab]);
+        if (scrollRef.current && !isScrolledUp) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [snapshot.consoleLogs.length, snapshot.timeline.length, snapshot.packets.length, activeTab, isScrolledUp]);
 
     const scrollToBottom = () => {
         if (scrollRef.current) {
