@@ -70,10 +70,10 @@
 
 .mission-panel__back {
     padding: 4px 10px;
-    border: 1px solid var(--color-border, #E2E4E9);
+    border: 1px solid var(--border, #E2E4E9);
     border-radius: 4px;
-    background: var(--color-bg, #F6F7F9);
-    color: var(--color-text-secondary, #8B8F9A);
+    background: var(--bg-secondary, #F6F7F9);
+    color: var(--text-secondary, #BDC3C7);
     font-size: 12px;
     cursor: pointer;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
@@ -81,8 +81,8 @@
 }
 
 .mission-panel__back:hover {
-    background: var(--color-surface, #FFFFFF);
-    color: var(--color-text-primary, #1B1D23);
+    background: var(--bg-card, #FFFFFF);
+    color: var(--text-primary, #FFFFFF);
 }
 
 .mission-panel__status-badge {
@@ -114,14 +114,14 @@
 }
 
 .mission-panel__title {
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
     font-size: 16px;
     font-weight: 600;
     margin: 0;
 }
 
 .mission-panel__desc {
-    color: var(--color-text-secondary, #8B8F9A);
+    color: var(--text-secondary, #BDC3C7);
     font-size: 13px;
     line-height: 1.5;
     margin: 0;
@@ -130,8 +130,8 @@
 .mission-panel__scenario {
     padding: 12px;
     border-radius: 6px;
-    background: var(--color-bg, #F6F7F9);
-    border: 1px solid var(--color-border, #E2E4E9);
+    background: var(--bg-secondary, #F6F7F9);
+    border: 1px solid var(--border, #E2E4E9);
 }
 
 .mission-panel__scenario-label {
@@ -140,13 +140,13 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-text-muted, #A0A4AE);
+    color: var(--text-tertiary, #7F8C8D);
     margin-bottom: 6px;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
 }
 
 .mission-panel__scenario p {
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
     font-size: 13px;
     line-height: 1.55;
     margin: 0;
@@ -168,15 +168,15 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-text-secondary, #8B8F9A);
+    color: var(--text-secondary, #BDC3C7);
     padding-bottom: 4px;
-    border-bottom: 1px solid var(--color-border, #E2E4E9);
+    border-bottom: 1px solid var(--border, #E2E4E9);
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
 }
 
 .mission-panel__hint-count {
     font-weight: 500;
-    color: var(--color-text-muted, #A0A4AE);
+    color: var(--text-tertiary, #7F8C8D);
 }
 
 .mission-panel__hint {
@@ -187,14 +187,14 @@
     border-radius: 5px;
     font-size: 13px;
     line-height: 1.45;
-    color: var(--color-text-secondary, #8B8F9A);
-    background: var(--color-bg, #F6F7F9);
-    border: 1px solid var(--color-border, #E2E4E9);
+    color: var(--text-secondary, #BDC3C7);
+    background: var(--bg-secondary, #F6F7F9);
+    border: 1px solid var(--border, #E2E4E9);
 }
 
 .mission-panel__hint--revealed {
-    color: var(--color-text-primary, #1B1D23);
-    background: var(--color-surface, #FFFFFF);
+    color: var(--text-primary, #FFFFFF);
+    background: var(--bg-card, #FFFFFF);
 }
 
 .mission-panel__hint-num {
@@ -205,7 +205,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--color-accent, #4B8DF8);
+    background: var(--accent, #4B8DF8);
     color: #FFFFFF;
     font-size: 11px;
     font-weight: 600;
@@ -214,7 +214,7 @@
 
 .mission-panel__hint-locked {
     font-style: italic;
-    color: var(--color-text-muted, #A0A4AE);
+    color: var(--text-tertiary, #7F8C8D);
     font-size: 12px;
 }
 
@@ -231,26 +231,26 @@
 }
 
 .mission-panel__btn--hint {
-    background: var(--color-bg, #F6F7F9);
-    border: 1px solid var(--color-border, #E2E4E9);
-    color: var(--color-accent, #4B8DF8);
+    background: var(--bg-secondary, #F6F7F9);
+    border: 1px solid var(--border, #E2E4E9);
+    color: var(--accent, #4B8DF8);
 }
 
 .mission-panel__btn--hint:hover {
-    background: var(--color-surface, #FFFFFF);
-    border-color: var(--color-accent, #4B8DF8);
+    background: var(--bg-card, #FFFFFF);
+    border-color: var(--accent, #4B8DF8);
 }
 
 .mission-panel__btn--solution {
     background: transparent;
-    border: 1px dashed var(--color-border, #E2E4E9);
-    color: var(--color-text-muted, #A0A4AE);
+    border: 1px dashed var(--border, #E2E4E9);
+    color: var(--text-tertiary, #7F8C8D);
     width: 100%;
 }
 
 .mission-panel__btn--solution:hover {
-    border-color: var(--color-text-secondary, #8B8F9A);
-    color: var(--color-text-secondary, #8B8F9A);
+    border-color: var(--text-secondary, #BDC3C7);
+    color: var(--text-secondary, #BDC3C7);
 }
 
 /* ---- Solver Section ---- */
@@ -262,13 +262,13 @@
     padding: 16px;
     border-radius: 8px;
     background: linear-gradient(135deg, rgba(75, 141, 248, 0.05), rgba(52, 181, 102, 0.05));
-    border: 1px solid var(--color-border, #E2E4E9);
+    border: 1px solid var(--border, #E2E4E9);
     margin-top: 8px;
 }
 
 .mission-panel__solver-desc {
     font-size: 13px;
-    color: var(--color-text-secondary, #8B8F9A);
+    color: var(--text-secondary, #BDC3C7);
     margin: 0;
 }
 
@@ -310,24 +310,24 @@
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    background: var(--color-bg, #F6F7F9);
-    color: var(--color-text-muted, #A0A4AE);
+    background: var(--bg-secondary, #F6F7F9);
+    color: var(--text-tertiary, #7F8C8D);
     font-size: 12px;
     font-weight: 700;
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    border: 1px solid var(--color-border, #E2E4E9);
+    border: 1px solid var(--border, #E2E4E9);
 }
 
 .mission-panel__option-btn:hover .mission-panel__option-index {
-    background: var(--color-accent, #4B8DF8);
+    background: var(--accent, #4B8DF8);
     color: #FFFFFF;
-    border-color: var(--color-accent, #4B8DF8);
+    border-color: var(--accent, #4B8DF8);
 }
 
 .mission-panel__option-text {
     font-size: 13px;
     font-weight: 500;
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
 }
 
 .mission-panel__solver-feedback {
@@ -404,34 +404,34 @@
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 4px;
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
 }
 
 .mission-panel__solution-row p {
     margin: 0;
     font-size: 13px;
     line-height: 1.5;
-    color: var(--color-text-secondary, #8B8F9A);
+    color: var(--text-secondary, #BDC3C7);
 }
 
 /* ---- Mission List ---- */
 
 .mission-panel__list-header {
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--color-border, #E2E4E9);
+    border-bottom: 1px solid var(--border, #E2E4E9);
 }
 
 .mission-panel__list-title {
     margin: 0 0 4px;
     font-size: 15px;
     font-weight: 600;
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
 }
 
 .mission-panel__list-subtitle {
     margin: 0;
     font-size: 12px;
-    color: var(--color-text-muted, #A0A4AE);
+    color: var(--text-tertiary, #7F8C8D);
 }
 
 .mission-panel__list {
@@ -469,7 +469,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-text-muted, #A0A4AE);
+    color: var(--text-tertiary, #7F8C8D);
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
 }
 
@@ -501,22 +501,22 @@
     margin: 0 0 4px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-text-primary, #1B1D23);
+    color: var(--text-primary, #FFFFFF);
 }
 
 .mission-card__desc {
     margin: 0 0 10px;
     font-size: 12px;
     line-height: 1.5;
-    color: var(--color-text-secondary, #8B8F9A);
+    color: var(--text-secondary, #BDC3C7);
 }
 
 .mission-card__start {
     padding: 6px 12px;
-    border: 1px solid var(--color-border, #E2E4E9);
+    border: 1px solid var(--border, #E2E4E9);
     border-radius: 4px;
-    background: var(--color-bg, #F6F7F9);
-    color: var(--color-accent, #4B8DF8);
+    background: var(--bg-secondary, #F6F7F9);
+    color: var(--accent, #4B8DF8);
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
@@ -525,6 +525,6 @@
 }
 
 .mission-card__start:hover {
-    background: var(--color-surface, #FFFFFF);
-    border-color: var(--color-accent, #4B8DF8);
+    background: var(--bg-card, #FFFFFF);
+    border-color: var(--accent, #4B8DF8);
 }
