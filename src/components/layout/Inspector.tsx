@@ -36,7 +36,7 @@ const INSPECTORS: Record<string, React.ComponentType> = {
 
 export default function Inspector() {
     const { snapshot } = useStore();
-    const [activeTab, setActiveTab] = React.useState<'specs' | 'story'>('specs');
+    const [activeTab, setActiveTab] = React.useState<'specs' | 'story'>('story');
 
     const ModuleInspector = snapshot.activeModule ? (INSPECTORS[snapshot.activeModule] || WipInspector) : undefined;
     const story = snapshot.learningStory;
@@ -47,16 +47,16 @@ export default function Inspector() {
                 <span className="inspector__title">Inspector</span>
                 <div className="inspector__tabs">
                     <button
-                        className={`inspector__tab ${activeTab === 'specs' ? 'inspector__tab--active' : ''}`}
-                        onClick={() => setActiveTab('specs')}
-                    >
-                        Specs
-                    </button>
-                    <button
                         className={`inspector__tab ${activeTab === 'story' ? 'inspector__tab--active' : ''}`}
                         onClick={() => setActiveTab('story')}
                     >
                         Story
+                    </button>
+                    <button
+                        className={`inspector__tab ${activeTab === 'specs' ? 'inspector__tab--active' : ''}`}
+                        onClick={() => setActiveTab('specs')}
+                    >
+                        Specs
                     </button>
                 </div>
             </div>

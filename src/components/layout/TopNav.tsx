@@ -140,7 +140,12 @@ export default function TopNav({
         <header className="topnav">
             <div className="topnav__left">
                 <button className="topnav__hamburger" onClick={onToggleSidebar} title="Toggle Sidebar">
-                    ☰
+                    <div className="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span className="hamburger-label">MENU</span>
                 </button>
                 <div className="topnav__logo">
                     <div className="topnav__logo-mark">M</div>

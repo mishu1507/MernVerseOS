@@ -102,10 +102,10 @@
 }
 
 .bottom-panel-container {
-    flex: 1;
-    min-height: 200px;
     display: flex;
     flex-direction: column;
+    flex: none;
+    min-height: 0;
 }
 
 .app__right-panel {
@@ -147,10 +147,10 @@
 }
 
 /* Animation for smooth UI transitions */
+/* Removed width/height from transition to make dragging snappy and not 'rigid' */
 .app__right-panel,
-.app__center,
 .sidebar {
-    transition: width 0.3s var(--ease), height 0.3s var(--ease), transform 0.3s var(--ease);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
 }
 
 @media (max-width: 900px) {

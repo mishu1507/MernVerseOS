@@ -71,7 +71,8 @@
     padding: 12px;
     font-family: var(--font-mono);
     font-size: 11px;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
+    min-height: 40px;
 }
 
 /* Console logs */
@@ -127,4 +128,25 @@
     .bottom-panel__tab-count {
         display: none;
     }
+}
+
+/* Custom Cartoon Scrollbar for logs */
+.bottom-panel__content::-webkit-scrollbar {
+    width: 14px;
+}
+
+.bottom-panel__content::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+    border-left: 3px solid var(--border);
+}
+
+.bottom-panel__content::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border: 3px solid var(--border);
+    border-radius: 20px;
+    box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.4);
+}
+
+.bottom-panel__content::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
 }

@@ -91,7 +91,7 @@ function AppContent() {
 
     // Resize hooks
     const rightPanel = useResize('x', 400, 280, 800, true);   // Inspector width (drag left = bigger)
-    const bottomPanel = useResize('y', 220, 100, 500, true);   // Bottom panel height (drag up = bigger)
+    const bottomPanel = useResize('y', 180, 80, 500, true);   // Bottom panel height (drag up = bigger)
 
     // Responsive effect: close sidebar on mobile by default
     useEffect(() => {
@@ -176,7 +176,7 @@ function AppContent() {
                             <div className="resize-bar resize-bar--horizontal" onMouseDown={bottomPanel.onMouseDown}>
                                 <div className="resize-bar__grip" />
                             </div>
-                            <BottomPanel height={window.innerWidth < 900 ? '100%' : bottomPanel.size} />
+                            <BottomPanel height="100%" />
                         </div>
                     )}
                 </div>

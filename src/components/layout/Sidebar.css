@@ -4,10 +4,10 @@
 
 .sidebar {
     position: absolute;
-    left: 20px;
-    top: 70px;
-    bottom: 20px;
-    width: 290px;
+    left: 15px;
+    top: 65px;
+    bottom: 15px;
+    width: 240px;
     background: var(--bg-card);
     display: flex;
     flex-direction: column;
@@ -107,7 +107,8 @@
     overscroll-behavior: contain;
     touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
-    /* Clean up the mask for better performance on mobile */
+    /* Glassy overlay effect for content area */
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02) 50%, transparent);
 }
 
 @media (max-width: 768px) {
@@ -161,6 +162,13 @@
     border-color: var(--border);
 }
 
+.sidebar__module-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
 .sidebar__module--active {
     background: var(--accent);
     color: var(--text-primary);
@@ -201,9 +209,13 @@
     flex-shrink: 0;
 }
 
+
+
 .sidebar__missions-section {
-    padding-bottom: 12px;
+    padding: 12px 14px;
     flex-shrink: 0;
+    background: var(--bg-card);
+    border-top: 3px solid var(--border);
 }
 
 .sidebar__footer {
