@@ -159,6 +159,7 @@ export interface SimulationSnapshot {
     activeMission: Mission | null;
     missionStatus: MissionStatus;
     revealedHints: number;
+    completedMissions: string[];
     // Conceptual Story
     learningStory: {
         title: string;

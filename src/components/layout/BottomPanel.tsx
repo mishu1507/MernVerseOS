@@ -14,18 +14,41 @@ export default function BottomPanel({ height = 220 }: BottomPanelProps) {
     const [activeTab, setActiveTab] = useState<TabName>('Console');
     const { snapshot } = useStore();
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [isScrolledUp, setIsScrolledUp] = useState(false);
 
-    // Auto-scroll to bottom on new logs, but only if already near bottom
-    useEffect(() => {
+    // Track scroll position to show/hide "Scroll to Bottom" button
+    const handleScroll = () => {
         if (scrollRef.current) {
             const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
-            const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
-
-            if (isNearBottom) {
-                scrollRef.current.scrollTop = scrollHeight;
-            }
+            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+            setIsScrolledUp(!isNearBottom && scrollHeight > clientHeight);
         }
-    }, [snapshot.consoleLogs, snapshot.timeline]);
+    };
+
+    // Auto-scroll logic
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        const el = scrollRef.current;
+
+        const frame = requestAnimationFrame(() => {
+            const { scrollTop, scrollHeight, clientHeight } = el;
+            const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
+            const isCurrentlyEmpty = scrollHeight <= clientHeight;
+
+            if (isNearBottom || isCurrentlyEmpty) {
+                el.scrollTop = el.scrollHeight;
+            }
+        });
+
+        return () => cancelAnimationFrame(frame);
+    }, [snapshot.consoleLogs.length, snapshot.timeline.length, snapshot.packets.length, activeTab]);
+
+    const scrollToBottom = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            setIsScrolledUp(false);
+        }
+    };
 
     // Filter reasoning logs
     const reasoningLogs = snapshot.consoleLogs.filter((log: ConsoleLog) =>
@@ -143,8 +166,14 @@ export default function BottomPanel({ height = 220 }: BottomPanelProps) {
                     </button>
                 ))}
             </div>
-            <div className="bottom-panel__content" ref={scrollRef}>
+            <div className="bottom-panel__content" ref={scrollRef} onScroll={handleScroll}>
                 {renderContent()}
+
+                {isScrolledUp && (activeTab === 'Console' || activeTab === 'Reasoning' || activeTab === 'Timeline') && (
+                    <button className="bottom-panel__scroll-btn" onClick={scrollToBottom}>
+                        ↓ New Logs Below
+                    </button>
+                )}
             </div>
         </div>
     );

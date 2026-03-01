@@ -106,6 +106,8 @@
     flex-direction: column;
     flex: none;
     min-height: 0;
+    overflow: hidden;
+    /* Ensure contents don't bleed */
 }
 
 .app__right-panel {

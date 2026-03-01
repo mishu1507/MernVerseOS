@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
+    /* Prevent parent from growing */
 }
 
 .bottom-panel__tabs {
@@ -73,6 +75,35 @@
     font-size: 11px;
     background: var(--bg-primary);
     min-height: 40px;
+    position: relative;
+    scroll-behavior: auto;
+    /* Instant snaps for logs */
+}
+
+/* Floating Scroll Button */
+.bottom-panel__scroll-btn {
+    position: sticky;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--text-primary);
+    border: 3px solid var(--border);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    z-index: 100;
+    white-space: nowrap;
+    animation: slideInUp 0.3s var(--ease-bounce);
+}
+
+.bottom-panel__scroll-btn:hover {
+    background: var(--accent-hover);
+    transform: translateX(-50%) translateY(-2px);
 }
 
 /* Console logs */

@@ -187,6 +187,7 @@ export default function MissionPanel() {
                     <MissionCard
                         key={mission.id}
                         mission={mission}
+                        isCompleted={snapshot.completedMissions.includes(mission.id)}
                         onStart={() => loadMission(mission)}
                     />
                 ))}
@@ -195,19 +196,33 @@ export default function MissionPanel() {
     );
 }
 
-function MissionCard({ mission, onStart }: { mission: Mission; onStart: () => void }) {
+function MissionCard({
+    mission,
+    isCompleted,
+    onStart
+}: {
+    mission: Mission;
+    isCompleted: boolean;
+    onStart: () => void
+}) {
     return (
-        <div className="mission-card">
+        <div className={`mission-card ${isCompleted ? 'mission-card--completed' : ''}`}>
             <div className="mission-card__top">
                 <span className="mission-card__category">{mission.category}</span>
-                <span className="mission-card__difficulty" data-difficulty={mission.difficulty}>
-                    {mission.difficulty}
-                </span>
+                <div className="mission-card__status-group">
+                    {isCompleted && <span className="mission-card__completed-badge">✓ Completed</span>}
+                    <span className="mission-card__difficulty" data-difficulty={mission.difficulty}>
+                        {mission.difficulty}
+                    </span>
+                </div>
             </div>
             <h4 className="mission-card__title">{mission.title}</h4>
             <p className="mission-card__desc">{mission.description}</p>
-            <button className="mission-card__start" onClick={onStart}>
-                Start challenge →
+            <button
+                className={`mission-card__start ${isCompleted ? 'mission-card__start--completed' : ''}`}
+                onClick={onStart}
+            >
+                {isCompleted ? 'Review Challenge' : 'Start challenge →'}
             </button>
         </div>
     );

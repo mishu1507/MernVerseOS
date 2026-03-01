@@ -43,6 +43,7 @@ export class SimulationEngine {
     private activeMission: Mission | null = null;
     private missionStatus: MissionStatus = "locked";
     private revealedHints = 0;
+    private completedMissions: Set<string> = new Set();
 
     constructor() {
         this.graph = new SystemGraph();
@@ -164,6 +165,11 @@ export class SimulationEngine {
     showSolution(isSolved: boolean = false): void {
         if (!this.activeMission) return;
         this.missionStatus = isSolved ? "completed" : "revealed_solution";
+
+        if (isSolved) {
+            this.completedMissions.add(this.activeMission.id);
+        }
+
         this.log("info", `❌ What went wrong: ${this.activeMission.whatWentWrong}`);
         this.log("success", `✅ How to fix: ${this.activeMission.howToFix}`);
         this.log("success", `📖 ${this.activeMission.successExplanation}`);
@@ -498,6 +504,7 @@ export class SimulationEngine {
             activeMission: this.activeMission,
             missionStatus: this.missionStatus,
             revealedHints: this.revealedHints,
+            completedMissions: Array.from(this.completedMissions),
             learningStory: this.initialModuleConfig?.learningStory || null,
         };
     }

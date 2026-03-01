@@ -457,6 +457,33 @@
     border-color: var(--accent);
 }
 
+.mission-card--completed {
+    border-color: var(--success);
+    background: linear-gradient(135deg, var(--bg-card), rgba(85, 230, 193, 0.05));
+}
+
+.mission-card--completed:hover {
+    border-color: var(--success);
+    box-shadow: 6px 6px 0px var(--success);
+}
+
+.mission-card__status-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mission-card__completed-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--success);
+    color: var(--bg-card);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
 .mission-card__top {
     display: flex;
     justify-content: space-between;
@@ -527,4 +554,15 @@
 .mission-card__start:hover {
     background: var(--bg-card, #FFFFFF);
     border-color: var(--accent, #4B8DF8);
+}
+
+.mission-card__start--completed {
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.mission-card__start--completed:hover {
+    background: var(--success);
+    color: var(--bg-card);
+    border-color: var(--success);
 }
