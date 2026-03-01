@@ -125,6 +125,27 @@
     margin-left: auto;
 }
 
+.topnav__btn--simulate-global {
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+
+.topnav__btn--simulate-global:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-1px);
+}
+
 .topnav__status {
     display: flex;
     align-items: center;

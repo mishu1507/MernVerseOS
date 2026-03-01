@@ -306,4 +306,25 @@
         display: none;
         /* Hide speed on tiny mobile */
     }
+
+    /* Scaling Nodes for Mobile */
+    .system-node__box {
+        width: 54px;
+        height: 54px;
+        font-size: 24px;
+        border-radius: 12px;
+    }
+
+    .system-node__name {
+        font-size: 9px;
+    }
+
+    .connection-label {
+        font-size: 9px;
+    }
+
+    .packet-dot {
+        width: 10px;
+        height: 10px;
+    }
 }

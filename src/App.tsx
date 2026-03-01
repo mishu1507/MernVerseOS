@@ -172,12 +172,12 @@ function AppContent() {
                     </div>
                     {/* ─── Horizontal resize bar (bottom panel) ─── */}
                     {!isFullScreen && (
-                        <>
+                        <div className="bottom-panel-container" style={{ height: window.innerWidth < 900 ? 'auto' : bottomPanel.size }}>
                             <div className="resize-bar resize-bar--horizontal" onMouseDown={bottomPanel.onMouseDown}>
                                 <div className="resize-bar__grip" />
                             </div>
-                            <BottomPanel height={bottomPanel.size} />
-                        </>
+                            <BottomPanel height={window.innerWidth < 900 ? '100%' : bottomPanel.size} />
+                        </div>
                     )}
                 </div>
                 {/* ─── Vertical resize bar (right panel) ─── */}

@@ -7,7 +7,7 @@ const TABS = ['Console', 'Reasoning', 'Timeline', 'Network', 'DB Logs'] as const
 type TabName = typeof TABS[number];
 
 interface BottomPanelProps {
-    height?: number;
+    height?: number | string;
 }
 
 export default function BottomPanel({ height = 220 }: BottomPanelProps) {
