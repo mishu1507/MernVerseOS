@@ -26,6 +26,11 @@
     opacity: 0.15;
 }
 
+[data-theme="dark"] .sim-canvas__grid {
+    opacity: 0.3;
+    /* Increased for better visibility against black background */
+}
+
 .sim-canvas__viewport {
     position: absolute;
     top: 0;
@@ -58,12 +63,17 @@
 /* ─── Connection Lines ─── */
 
 .connection-line {
-    stroke: var(--border);
-    stroke-width: 4;
+    stroke: var(--connection-line);
+    stroke-width: 3;
     stroke-dasharray: 10 8;
     fill: none;
-    opacity: 0.3;
-    transition: opacity 0.3s var(--ease);
+    opacity: 0.8;
+    /* Increased from 0.3 for better dark mode visibility */
+    transition: all 0.3s var(--ease);
+}
+
+[data-theme="dark"] .connection-line {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
 }
 
 .connection-line--running {

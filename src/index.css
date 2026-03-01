@@ -13,6 +13,8 @@
   --bg-elevated: #FFFFFF;
   /* — Structural Borders (Static Ink) — */
   --border: #2D3436;
+  --connection-line: #A2AFB5;
+  /* Soft grey for light mode */
   /* Bold Dark Border — Always dark for cartoon look */
   --border-light: #B2BEC3;
 
@@ -104,6 +106,8 @@
   --bg-active: #222222;
 
   --border: #333333;
+  --connection-line: #444444;
+  /* Much more visible in dark mode */
   /* Premium Charcoal Border */
   --border-light: #222222;
 
