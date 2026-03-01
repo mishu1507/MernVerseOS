@@ -125,7 +125,12 @@ export default function TutorialLanding({ onStart }: TutorialLandingProps) {
             )}
 
             <div className="landing-footer-hint">
-                v1.0.0
+                <div className="landing-footer-copy">© 2026 Aditi Borkar</div>
+                <div className="landing-footer-links">
+                    <a href="https://www.linkedin.com/in/mishuborkar-csa152006/" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <span>•</span>
+                    <a href="mailto:aditi.borkar1507@gmail.com">Contact</a>
+                </div>
             </div>
         </div>
     );

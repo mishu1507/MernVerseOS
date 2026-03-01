@@ -151,3 +151,36 @@
     padding-bottom: 12px;
     flex-shrink: 0;
 }
+
+.sidebar__footer {
+    padding: 16px 14px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 600;
+}
+
+.sidebar__footer-copy {
+    margin-bottom: 4px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.sidebar__footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sidebar__footer-links a {
+    color: var(--info);
+    text-decoration: none;
+    font-weight: 800;
+    transition: color 0.2s;
+}
+
+.sidebar__footer-links a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}

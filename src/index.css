@@ -40,7 +40,7 @@
   --info-bg: rgba(9, 132, 227, 0.1);
 
   /* — Highlight Colors — */
-  --teal: #81ECEC;
+  --teal: #0097A7;
   --mustard: #FFEAA7;
   --coral: #FF7675;
   --lavender: #A29BFE;
@@ -113,6 +113,7 @@
   --text-inverse: #000000;
 
   --accent: #FFD32A;
+  --teal: #81ECEC;
   --shadow-md: 4px 4px 0px rgba(255, 255, 255, 0.05);
 }
 

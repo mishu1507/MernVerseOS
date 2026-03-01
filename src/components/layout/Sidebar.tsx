@@ -100,6 +100,17 @@ export default function Sidebar({ onModuleSelect, onMissionsClick, showMissions,
                     <span className="sidebar__module-label">System Challenges</span>
                 </button>
             </div>
+
+            <div className="sidebar__divider" />
+
+            <div className="sidebar__footer">
+                <div className="sidebar__footer-copy">© 2026 Aditi Borkar</div>
+                <div className="sidebar__footer-links">
+                    <a href="https://www.linkedin.com/in/mishuborkar-csa152006/" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <span>•</span>
+                    <a href="mailto:aditi.borkar1507@gmail.com">Contact</a>
+                </div>
+            </div>
         </aside>
     );
 }
