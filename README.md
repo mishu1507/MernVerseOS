@@ -15,7 +15,7 @@ MERNVerseOS transforms learning into an interactive experience:
 - ⚙️ Understand real application workflows
 - 🧩 Debug simulated production scenarios
 
-Users don't just write code — they **operate a system**.
+Users don't just write code - they **operate a system**.
 
 ---
 
