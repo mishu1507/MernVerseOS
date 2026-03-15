@@ -1,0 +1,538 @@
+/* ========================================
+   Inspector — Premium Cartoon
+   ======================================== */
+
+.inspector {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.inspector__header {
+    padding: 10px 14px;
+    border-bottom: 3px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.inspector__title {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.inspector__tabs {
+    display: flex;
+    background: var(--bg-primary);
+    padding: 3px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+}
+
+.inspector__tab {
+    flex: 1;
+    padding: 5px;
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 7px;
+    transition: all 0.2s;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.inspector__tab--active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 2px 2px 0px var(--border);
+}
+
+.inspector__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px;
+    min-height: 0;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+}
+
+/* On mobile inspector is a horizontal drawer — make content scroll horizontally too */
+@media (max-width: 900px) {
+    .inspector__header {
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 12px;
+        gap: 12px;
+    }
+    .inspector__title { font-size: 10px; }
+    .inspector__tabs  { flex-shrink: 0; }
+
+    .learning-story {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        padding: 4px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .learning-story::-webkit-scrollbar { display: none; }
+
+    .learning-story__header,
+    .learning-story__section,
+    .learning-story__analogy,
+    .learning-story__simulator {
+        min-width: 240px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        margin-bottom: 0;
+    }
+}
+.inspector__section {
+    margin-bottom: 24px;
+}
+
+.inspector__section-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+}
+
+/* Stack & Items */
+.inspector__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inspector__stack-item {
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-primary);
+    box-shadow: 3px 3px 0px var(--border);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+.inspector__stack-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--border);
+}
+
+.inspector__stack-item--active {
+    background: var(--accent);
+}
+
+.inspector__queue {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.inspector__queue-item {
+    padding: 6px 12px;
+    background: var(--teal);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 2px 2px 0px var(--border);
+}
+
+/* Metrics */
+.inspector__metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+}
+
+.inspector__metric-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+}
+
+.inspector__metric-value {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.inspector__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+    text-align: center;
+    padding: 20px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+
+/* ========================================
+   Learning Story — Kid Friendly
+   ======================================== */
+
+.learning-story {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 8px;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.learning-story__header {
+    background: var(--purple, #a855f7);
+    padding: 16px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.learning-story__icon {
+    font-size: 32px;
+}
+
+.learning-story__title {
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+}
+
+.learning-story__section {
+    background: var(--bg-card);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+}
+
+.learning-story__section-title {
+    display: block;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.learning-story__content {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 500;
+}
+
+.learning-story__analogy {
+    background: var(--yellow, #facc15);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+}
+
+.learning-story__analogy .learning-story__section-title {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.learning-story__analogy-text {
+    font-size: 15px;
+    font-weight: 800;
+    color: #443300;
+    margin: 0;
+    font-style: italic;
+}
+
+.learning-story__simulator {
+    background: linear-gradient(135deg, var(--teal), #2dd4bf);
+    padding: 20px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px var(--border);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    animation: secretPulse 3s infinite ease-in-out;
+}
+
+@keyframes secretPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--border);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 8px 8px 15px rgba(45, 212, 191, 0.3), 6px 6px 0px var(--border);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--border);
+    }
+}
+
+.learning-story__simulator::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transform: rotate(45deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.learning-story__look-for {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.learning-story__look-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.animate-in {
+    animation: slideInLeft 0.3s var(--ease-bounce) both;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.inspector__badge {
+    font-size: 9px;
+    background: var(--border);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+}
+
+.inspector__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.stack-icon {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.inspector__stack-item--empty,
+.inspector__empty-text {
+    opacity: 0.4;
+    font-style: italic;
+    font-size: 11px;
+    padding: 10px;
+    text-align: center;
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    color: var(--text-tertiary);
+}
+
+/* ── Inspector mobile drawer ── */
+@media (max-width: 900px) {
+  .inspector {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .inspector__header {
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 10px;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .inspector__title {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .inspector__tabs {
+    flex-shrink: 0;
+  }
+
+  .inspector__content {
+    padding: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Story cards scroll horizontally on mobile drawer */
+  .learning-story {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .learning-story::-webkit-scrollbar {
+    display: none;
+  }
+
+  .learning-story__header,
+  .learning-story__section,
+  .learning-story__analogy,
+  .learning-story__simulator {
+    min-width: 220px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    margin-bottom: 0 !important;
+  }
+
+  .learning-story__title {
+    font-size: 14px;
+  }
+
+  .learning-story__content {
+    font-size: 13px;
+  }
+}
+
+/* ─── Inspector tab segmented ─── */
+.inspector__tabs {
+  background: var(--bg-tertiary) !important; padding: 3px !important;
+  border-radius: 10px !important; border: 2px solid var(--border) !important; gap: 2px !important;
+}
+.inspector__tab {
+  border-radius: 7px !important; border: none !important; background: transparent !important;
+  color: var(--text-tertiary) !important; font-weight: 900 !important; font-size: 9px !important;
+  text-transform: uppercase !important; letter-spacing: .06em !important;
+  transition: all .12s !important; padding: 6px !important;
+}
+.inspector__tab:hover { color: var(--text-primary) !important; background: var(--bg-hover) !important; }
+.inspector__tab--active { background: var(--accent) !important; color: #000 !important; box-shadow: 1px 1px 0px var(--border) !important; }
+
+/* ─── Story header — purple gradient ─── */
+.learning-story__header {
+  background: linear-gradient(135deg,#a855f7,#7c3aed) !important;
+  padding: 18px !important; border-radius: 16px !important;
+  border: 2.5px solid var(--border) !important; box-shadow: 5px 5px 0px var(--border) !important;
+  display: flex !important; align-items: center !important; gap: 14px !important;
+}
+.learning-story__title { font-size: 15px !important; font-weight: 900 !important; color: #fff !important; line-height: 1.3 !important; }
+
+/* ─── Section cards ─── */
+.learning-story__section {
+  background: var(--bg-card) !important; border: 2px solid var(--border) !important;
+  border-radius: 14px !important; box-shadow: 4px 4px 0px var(--border) !important; padding: 16px 18px !important;
+}
+.learning-story__section-title {
+  font-size: 8px !important; font-weight: 900 !important; text-transform: uppercase !important;
+  letter-spacing: .14em !important; color: var(--text-tertiary) !important; margin-bottom: 10px !important;
+  display: flex !important; align-items: center !important; gap: 8px !important;
+}
+.learning-story__section-title::after { content:'' !important; flex:1 !important; height:1px !important; background: var(--border-light) !important; }
+.learning-story__content { font-size: 13px !important; line-height: 1.65 !important; font-weight: 500 !important; }
+
+/* ─── Analogy card — yellow ─── */
+.learning-story__analogy {
+  background: var(--accent) !important; border: 2.5px solid var(--border) !important;
+  border-radius: 14px !important; box-shadow: 4px 4px 0px var(--border) !important; padding: 16px 18px !important;
+}
+.learning-story__analogy .learning-story__section-title { color: rgba(0,0,0,.4) !important; }
+.learning-story__analogy .learning-story__content { font-weight: 800 !important; font-style: italic !important; color: #2d1a00 !important; }
+
+/* ─── Look-for card — teal ─── */
+.learning-story__simulator {
+  background: linear-gradient(135deg,#0097A7,#00b4d8) !important;
+  border: 2.5px solid var(--border) !important; border-radius: 14px !important;
+  box-shadow: 4px 4px 0px var(--border) !important; padding: 16px 18px !important;
+}
+.learning-story__simulator .learning-story__section-title { color: rgba(255,255,255,.65) !important; }
+.learning-story__simulator .learning-story__content { font-weight: 700 !important; color: #fff !important; }
+
+/* ─── Staggered slide-in ─── */
+.learning-story__header   { animation: card-in .25s var(--ease-bounce) both !important; }
+.learning-story__section  { animation: card-in .25s var(--ease-bounce) .05s both !important; }
+.learning-story__analogy  { animation: card-in .25s var(--ease-bounce) .10s both !important; }
+.learning-story__simulator{ animation: card-in .25s var(--ease-bounce) .15s both !important; }
+@keyframes card-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }

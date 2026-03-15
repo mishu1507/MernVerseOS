@@ -1,0 +1,285 @@
+/* ========================================
+   BottomPanel — Premium Cartoon
+   ======================================== */
+
+.bottom-panel {
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent parent from growing */
+}
+
+.bottom-panel__tabs {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid var(--border);
+    padding: 0 12px;
+    gap: 4px;
+    background: var(--bg-primary);
+}
+
+.bottom-panel__tab {
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-tertiary);
+    transition: all 0.2s;
+    cursor: pointer;
+    user-select: none;
+    font-family: var(--font-mono);
+    border-right: 3px solid var(--border);
+    border-left: 3px solid transparent;
+    display: flex;
+    /* Added flex to separate count */
+    align-items: center;
+    gap: 8px;
+}
+
+.bottom-panel__tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.bottom-panel__tab--active {
+    color: var(--text-primary);
+    background: var(--accent);
+    border-left-color: var(--border);
+}
+
+.bottom-panel__tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.bottom-panel__tab--active .bottom-panel__tab-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--text-inverse);
+}
+
+.bottom-panel__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--bg-primary);
+    min-height: 40px;
+    position: relative;
+    scroll-behavior: auto;
+    /* Instant snaps for logs */
+}
+
+/* Floating Scroll Button */
+.bottom-panel__scroll-btn {
+    position: sticky;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--text-primary);
+    border: 3px solid var(--border);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    z-index: 100;
+    white-space: nowrap;
+    animation: slideInUp 0.3s var(--ease-bounce);
+}
+
+.bottom-panel__scroll-btn:hover {
+    background: var(--accent-hover);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* Console logs */
+.log-line {
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+}
+
+.log-line:hover {
+    background: var(--bg-hover);
+}
+
+.log-line__level {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 9px;
+    margin-right: 8px;
+}
+
+.log-line__level--info {
+    color: var(--info);
+}
+
+.log-line__level--warn {
+    color: var(--warning);
+}
+
+.log-line__level--error {
+    color: var(--error);
+}
+
+.log-line__level--success {
+    color: var(--success);
+}
+
+.log-line--reasoning {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-bg);
+}
+
+.log-line--reasoning .log-line__message {
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .bottom-panel__tabs {
+        padding: 0 6px;
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .bottom-panel__tabs::-webkit-scrollbar { display: none; }
+
+    .bottom-panel__tab {
+        padding: 8px 8px;
+        font-size: 9px;
+        flex-shrink: 0;
+    }
+
+    .bottom-panel__tab-count {
+        display: none;
+    }
+
+    .bottom-panel__content {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bottom-panel__tab {
+        padding: 6px 5px;
+        font-size: 8px;
+    }
+}
+
+/* Custom Cartoon Scrollbar for logs */
+.bottom-panel__content::-webkit-scrollbar {
+    width: 14px;
+}
+
+.bottom-panel__content::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+    border-left: 3px solid var(--border);
+}
+
+.bottom-panel__content::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border: 3px solid var(--border);
+    border-radius: 20px;
+    box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.4);
+}
+
+.bottom-panel__content::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+
+/* ── Bottom panel mobile ── */
+@media (max-width: 900px) {
+  .bottom-panel__tabs {
+    padding: 0 6px;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bottom-panel__tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bottom-panel__tab {
+    padding: 8px 8px;
+    font-size: 9px;
+    flex-shrink: 0;
+    border-right: 2px solid var(--border);
+  }
+
+  .bottom-panel__tab-count {
+    display: none;
+  }
+
+  .bottom-panel__content {
+    font-size: 10px;
+    padding: 6px 8px;
+    line-height: 1.4;
+  }
+
+  .log-line {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-panel__tab {
+    padding: 6px 6px;
+    font-size: 8px;
+  }
+
+  .bottom-panel__content {
+    font-size: 9px;
+  }
+}
+
+/* ─── Active tab → yellow underline ─── */
+.bottom-panel__tab {
+  border-bottom: 3px solid transparent !important;
+  margin-bottom: -3px !important;
+  border-right: none !important; border-left: none !important; border-top: none !important;
+  background: none !important; border-radius: 0 !important;
+  text-transform: uppercase !important; letter-spacing: .05em !important;
+}
+.bottom-panel__tab--active {
+  border-bottom-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  font-weight: 900 !important;
+}
+.bottom-panel__tab--active .bottom-panel__tab-count { background: var(--accent) !important; color: #000 !important; }
+
+/* ─── Log level badges colored ─── */
+.log-line__level--info    { background: rgba(9,132,227,.12)  !important; color: #0959bd !important; }
+.log-line__level--success { background: rgba(0,184,148,.12)  !important; color: #077a5e !important; }
+.log-line__level--warn    { background: rgba(230,126,34,.12) !important; color: #a05000 !important; }
+.log-line__level--error   { background: rgba(214,48,49,.12)  !important; color: #b01c1c !important; }
+[data-theme="dark"] .log-line__level--info    { color: #74B9FF !important; background: rgba(116,185,255,.12) !important; }
+[data-theme="dark"] .log-line__level--success { color: #00cba5 !important; background: rgba(0,184,148,.12)   !important; }
+[data-theme="dark"] .log-line__level--warn    { color: #fdcb6e !important; background: rgba(253,203,110,.12) !important; }
+[data-theme="dark"] .log-line__level--error   { color: #ff7675 !important; background: rgba(255,118,117,.12) !important; }
+
+.log-line--reasoning {
+  border-left: 3px solid var(--accent) !important;
+  background: rgba(255,211,42,.04) !important;
+  padding-left: 10px !important;
+  border-radius: 0 5px 5px 0 !important;
+}

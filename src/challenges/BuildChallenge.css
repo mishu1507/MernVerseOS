@@ -1,0 +1,785 @@
+/* ========================================
+   Build Challenge — Drag & Drop Game
+   ======================================== */
+
+.build-challenge {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+/* ── Header bar ── */
+.bc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border-bottom: 3px solid var(--border);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.bc-header__title {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.bc-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bc-badge {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 2px solid var(--border);
+  font-family: var(--font-mono);
+}
+
+.bc-badge--beginner     { background: rgba(0,184,148,0.15);  color: var(--success); }
+.bc-badge--intermediate { background: rgba(250,177,160,0.2); color: var(--warning); }
+.bc-badge--advanced     { background: rgba(214,48,49,0.15);  color: var(--error);   }
+
+.bc-header__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.bc-btn {
+  height: 34px;
+  padding: 0 14px;
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.15s var(--ease-bounce);
+  box-shadow: 3px 3px 0px var(--border);
+  text-transform: uppercase;
+}
+
+.bc-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--border);
+}
+
+.bc-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--border);
+}
+
+.bc-btn--run {
+  background: var(--accent);
+  color: #000;
+}
+
+.bc-btn--run:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 3px 3px 0px var(--border);
+}
+
+.bc-btn--reset {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.bc-btn--back {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+/* ── Briefing strip ── */
+.bc-briefing {
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border-bottom: 3px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.bc-briefing strong {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+/* ── Main game area ── */
+.bc-game {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Canvas / diagram area ── */
+.bc-canvas {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bc-canvas__label {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+
+/* ── SVG connection lines ── */
+.bc-canvas__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bc-connection {
+  stroke: var(--connection-line);
+  stroke-width: 2;
+  stroke-dasharray: 8 5;
+  fill: none;
+  transition: stroke 0.3s;
+}
+
+.bc-connection--solved {
+  stroke: var(--success);
+  stroke-dasharray: none;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(0,184,148,0.4));
+}
+
+.bc-connection--error {
+  stroke: var(--error);
+  stroke-dasharray: none;
+  stroke-width: 3;
+  animation: bc-pulse-error 0.8s ease infinite;
+}
+
+.bc-connection-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--text-tertiary);
+  paint-order: stroke;
+  stroke: var(--bg-secondary);
+  stroke-width: 3px;
+}
+
+@keyframes bc-pulse-error {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Slots ── */
+.bc-slot {
+  position: absolute;
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  cursor: default;
+}
+
+.bc-slot__box {
+  width: 80px;
+  height: 80px;
+  border: 3px dashed var(--border);
+  border-radius: 16px;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: all 0.2s var(--ease-bounce);
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.bc-slot__box--empty {
+  background: rgba(255,255,255,0.4);
+  animation: bc-pulse-slot 2s ease infinite;
+}
+
+@keyframes bc-pulse-slot {
+  0%, 100% { border-color: var(--border); box-shadow: 3px 3px 0px rgba(0,0,0,0.08); }
+  50%       { border-color: var(--accent); box-shadow: 3px 3px 0px var(--accent); }
+}
+
+.bc-slot__box--filled {
+  border-style: solid;
+  border-color: var(--border);
+  animation: none;
+}
+
+.bc-slot__box--error {
+  border-style: solid;
+  border-color: var(--error) !important;
+  background: rgba(214,48,49,0.08) !important;
+  animation: bc-shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  box-shadow: 3px 3px 0px var(--error) !important;
+}
+
+.bc-slot__box--correct {
+  border-style: solid;
+  border-color: var(--success) !important;
+  background: rgba(0,184,148,0.08) !important;
+  animation: none;
+  box-shadow: 3px 3px 0px var(--success) !important;
+}
+
+@keyframes bc-shake {
+  10%, 90% { transform: translate3d(-2px,0,0); }
+  20%, 80% { transform: translate3d(3px,0,0);  }
+  30%, 50%, 70% { transform: translate3d(-4px,0,0); }
+  40%, 60% { transform: translate3d(4px,0,0);  }
+}
+
+.bc-slot__box--drag-over {
+  border-color: var(--accent) !important;
+  border-style: solid !important;
+  background: rgba(255,211,42,0.1) !important;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px rgba(255,211,42,0.3), 3px 3px 0px var(--border) !important;
+  animation: none !important;
+}
+
+.bc-slot__number {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 20px;
+  height: 20px;
+  background: var(--border);
+  color: var(--bg-card);
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+}
+
+.bc-slot__hint {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 100px;
+  font-family: var(--font-mono);
+}
+
+.bc-slot__label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  background: var(--bg-card);
+  padding: 2px 8px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px var(--border);
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Error tooltip ── */
+.bc-error-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--error);
+  color: white;
+  font-size: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0px var(--border);
+  width: 200px;
+  text-align: center;
+  line-height: 1.4;
+  font-family: var(--font-mono);
+  z-index: 100;
+  animation: slideInUp 0.3s var(--ease-bounce);
+  pointer-events: none;
+}
+
+.bc-error-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--border);
+}
+
+/* ── Tool Palette ── */
+.bc-palette {
+  width: 200px;
+  background: var(--bg-card);
+  border-left: 3px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bc-palette__header {
+  padding: 10px 12px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.bc-palette__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bc-element {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  cursor: grab;
+  transition: all 0.15s var(--ease-bounce);
+  box-shadow: 2px 2px 0px var(--border);
+  user-select: none;
+}
+
+.bc-element:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border);
+  background: var(--bg-hover);
+}
+
+.bc-element:active,
+.bc-element--dragging {
+  cursor: grabbing;
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.bc-element--used {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.bc-element__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.bc-element__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.bc-element__label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bc-element__desc {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Status bar ── */
+.bc-status {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border-top: 2px solid var(--border);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.bc-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--text-tertiary);
+}
+
+.bc-status--running .bc-status__dot { background: var(--accent); animation: pulse 1s ease infinite; }
+.bc-status--error   .bc-status__dot { background: var(--error); }
+.bc-status--success .bc-status__dot { background: var(--success); }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* ── Success overlay ── */
+.bc-success-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.3s ease;
+}
+
+.bc-success-card {
+  background: var(--bg-card);
+  border: 4px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 10px 10px 0px var(--border);
+  animation: slideInUp 0.4s var(--ease-bounce);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bc-success-card__emoji {
+  font-size: 52px;
+  text-align: center;
+}
+
+.bc-success-card__title {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.bc-success-card__content {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  background: var(--bg-secondary);
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+}
+
+.bc-success-card__analogy {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-primary);
+  background: var(--accent);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  font-weight: 700;
+}
+
+.bc-success-card__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.bc-success-card__attempts {
+  text-align: center;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+}
+
+/* ── Challenge list ── */
+.bc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.bc-list__header {
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--border);
+}
+
+.bc-list__title {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.bc-list__subtitle {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.bc-card {
+  padding: 14px;
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-card);
+  transition: all 0.2s var(--ease-bounce);
+  box-shadow: 4px 4px 0px var(--border);
+  cursor: pointer;
+}
+
+.bc-card:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: 6px 6px 0px var(--border);
+  border-color: var(--accent);
+}
+
+.bc-card--solved {
+  border-color: var(--success);
+  background: linear-gradient(135deg, var(--bg-card), rgba(0,184,148,0.05));
+}
+
+.bc-card--solved:hover {
+  border-color: var(--success);
+  box-shadow: 6px 6px 0px var(--success);
+}
+
+.bc-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bc-card__category {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.bc-card__title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.bc-card__desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.bc-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bc-card__cta {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bc-card__solved-badge {
+  font-size: 9px;
+  font-weight: 900;
+  background: var(--success);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .bc-palette {
+    width: 160px;
+  }
+
+  .bc-element__desc {
+    display: none;
+  }
+
+  .bc-slot__box {
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+  }
+
+  .bc-slot__hint {
+    display: none;
+  }
+
+  .bc-header__title {
+    font-size: 11px;
+  }
+
+  .bc-btn {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bc-palette {
+    width: 130px;
+  }
+
+  .bc-slot__box {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+/* ── Canvas scroll for small screens ── */
+.bc-canvas {
+  overflow: auto !important;
+  min-width: 0 !important;
+}
+
+/* ── Inner diagram area with fixed size so slots don't overlap ── */
+.bc-canvas__inner {
+  position: relative;
+  width: 1050px;
+  height: 420px;
+  min-width: 1050px;
+  min-height: 420px;
+  flex-shrink: 0;
+}
+
+/* ── Full game area fills height ── */
+.bc-game {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ── Palette scrolls internally ── */
+.bc-palette {
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.bc-palette__list {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
+}
+
+/* ── SVG covers the inner diagram area ── */
+.bc-canvas__svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1050px !important;
+  height: 420px !important;
+  pointer-events: none !important;
+}
+
+/* ── Challenge list fills full area ── */
+.bc-list {
+  height: 100% !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* ── build-challenge root fills parent ── */
+.build-challenge {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* ── Improve: prominent completed sign on list cards ── */
+.bc-card--solved {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.bc-card--solved::after {
+  content: 'COMPLETED' !important;
+  position: absolute !important;
+  top: 15px !important;
+  right: -30px !important;
+  background: var(--success) !important;
+  color: white !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  padding: 4px 40px !important;
+  transform: rotate(45deg) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  letter-spacing: 1px !important;
+}
+
+.bc-card--solved .bc-card__cta {
+  color: var(--success) !important;
+}

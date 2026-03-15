@@ -1,0 +1,783 @@
+/* ========================================
+   TopNav — Fully Responsive
+   ======================================== */
+
+.topnav {
+    height: var(--topnav-height);
+    background: var(--bg-card);
+    border-bottom: 3px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    z-index: 1000;
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.topnav__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.topnav__hamburger {
+    height: 36px;
+    background: var(--bg-primary);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--border);
+    transition: all 0.2s var(--ease-bounce);
+    flex-shrink: 0;
+}
+
+.hamburger-label {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.1em;
+    font-family: var(--font-mono);
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 16px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.topnav__hamburger:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px var(--border);
+}
+
+.topnav__logo {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.topnav__logo-mark {
+    width: 30px;
+    height: 30px;
+    background: var(--accent);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text-inverse);
+    box-shadow: 2px 2px 0px var(--border);
+    flex-shrink: 0;
+}
+
+.topnav__logo-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    color: var(--text-primary);
+}
+
+.topnav__os-badge {
+    font-size: 11px;
+    background: var(--bg-tertiary);
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    border: 2px solid var(--border);
+    box-shadow: 1px 1px 0px var(--border);
+    font-weight: 800;
+}
+
+.topnav__module-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    box-shadow: 2px 2px 0px var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+.topnav__separator {
+    width: 2px;
+    height: 18px;
+    background: var(--border);
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ── Controls: scrollable row on small screens ── */
+.topnav__controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-shrink: 1;
+    min-width: 0;
+    /* Hide scrollbar but keep scrollable */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.topnav__controls::-webkit-scrollbar { display: none; }
+
+.topnav__btn--simulate-global {
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.topnav__btn--simulate-global:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+.topnav__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    border-radius: 7px;
+    flex-shrink: 0;
+}
+
+.topnav__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    flex-shrink: 0;
+}
+
+.topnav__status-dot.running  { background: var(--success); }
+.topnav__status-dot.paused   { background: var(--warning); }
+
+.topnav__status-text {
+    font-size: 9px;
+    font-weight: 900;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.topnav__actions {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.topnav__btn {
+    width: 34px;
+    height: 34px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: var(--text-primary);
+    transition: all 0.15s var(--ease-bounce);
+    box-shadow: 2px 2px 0px var(--border);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.topnav__btn:hover {
+    background: var(--bg-hover);
+    transform: translateY(-1px);
+}
+
+.topnav__btn.active {
+    background: var(--accent);
+    border-color: var(--border);
+}
+
+.topnav__btn--why {
+    width: auto;
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.topnav__speed-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.topnav__speed-label {
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.topnav__speed-buttons {
+    display: flex;
+    gap: 1px;
+    background: var(--bg-tertiary);
+    padding: 2px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+}
+
+.topnav__speed-btn {
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: 800;
+    border-radius: 3px;
+    color: var(--text-primary);
+    transition: all 0.1s;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.topnav__speed-btn:hover  { background: var(--bg-hover); }
+.topnav__speed-btn.active { background: var(--accent); color: #000; }
+
+/* ── 1200px: hide speed control label ── */
+@media (max-width: 1200px) {
+    .topnav__speed-label { display: none; }
+}
+
+/* ── 1024px: hide module badge ── */
+@media (max-width: 1024px) {
+    .topnav__module-badge { display: none; }
+    .topnav__logo-title   { font-size: 16px; }
+}
+
+/* ── 860px: hide speed buttons ── */
+@media (max-width: 860px) {
+    .topnav__speed-control { display: none; }
+    .topnav__btn--simulate-global { display: none; }
+}
+
+/* ── 640px: compact everything ── */
+@media (max-width: 640px) {
+    .topnav { padding: 0 8px; gap: 4px; height: 46px; }
+    .topnav__logo-title { display: none; }
+    .hamburger-label    { display: none; }
+    .topnav__status     { display: none; }
+    .topnav__separator  { display: none; }
+    .topnav__btn { width: 30px; height: 30px; font-size: 13px; }
+    .topnav__btn--why { width: auto; padding: 0 7px; font-size: 9px; }
+    .topnav__logo-mark { width: 26px; height: 26px; font-size: 14px; }
+}
+
+/* ── 400px: ultra compact ── */
+@media (max-width: 400px) {
+    .topnav__actions { gap: 2px; }
+    .topnav__btn { width: 28px; height: 28px; font-size: 12px; border-width: 1px; }
+}
+
+/* ── TopNav responsive ── */
+
+/* Make controls scrollable instead of hiding them */
+.topnav__controls {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.topnav__controls::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .topnav__speed-control {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .topnav__module-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .topnav__btn--simulate-global {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .topnav {
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .topnav__logo-title {
+    font-size: 18px;
+  }
+
+  .topnav__btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .topnav__btn--why {
+    width: auto;
+    padding: 0 8px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topnav__logo-title {
+    display: none;
+  }
+
+  .hamburger-label {
+    display: none;
+  }
+
+  .topnav__status {
+    display: none;
+  }
+
+  .topnav {
+    height: 46px;
+    padding: 0 6px;
+    gap: 4px;
+  }
+
+  .topnav__separator {
+    display: none;
+  }
+
+  .topnav__btn {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+    border-width: 2px;
+    box-shadow: 1px 1px 0px var(--border);
+  }
+}
+
+/* Outlined yellow pill ─── */
+
+/* ── Fix: ensure ALL icon buttons in topnav have consistent style ── */
+.topnav__btn,
+.topnav button,
+.topnav [role="button"] {
+  min-width: 34px !important;
+  height: 34px !important;
+  background: var(--bg-primary) !important;
+  border: 2px solid var(--border) !important;
+  border-radius: 9px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  color: var(--text-primary) !important;
+  cursor: pointer !important;
+  box-shadow: 2px 2px 0px var(--border) !important;
+  transition: all 0.15s var(--ease-bounce) !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+.topnav__btn:hover,
+.topnav button:hover {
+  background: var(--bg-hover) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 3px 3px 0px var(--border) !important;
+}
+
+.topnav__btn:active,
+.topnav button:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0px 0px 0px var(--border) !important;
+}
+
+/* Play button specifically gets accent color */
+.topnav__btn--play,
+.topnav__btn[aria-label="play"],
+.topnav__btn[title="play"],
+.topnav__btn[title="Play"] {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* Keep WHY and simulate special styles intact */
+.topnav__btn--why {
+  width: auto !important;
+  padding: 0 12px !important;
+  border-radius: 20px !important;
+}
+
+.topnav__btn--simulate-global {
+  width: auto !important;
+  padding: 0 14px !important;
+  border-radius: 20px !important;
+  border-color: var(--accent) !important;
+  background: rgba(255,211,42,.07) !important;
+  color: #8a6a00 !important;
+}
+
+[data-theme="dark"] .topnav__btn--simulate-global {
+  color: var(--accent) !important;
+}
+
+/* ── Fix: topnav must never overflow the app width ── */
+.topnav {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  min-width: 0 !important;
+}
+
+/* The actions group (rightmost buttons including theme toggle) must
+   always be visible and never get cut off */
+.topnav__actions {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  gap: 3px !important;
+  margin-left: 0 !important;
+}
+
+/* Controls (middle section) absorbs the overflow — shrinks if needed */
+.topnav__controls {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  overflow: hidden !important;
+}
+
+/* Theme toggle button — always the last item, must stay visible */
+.topnav__btn--theme,
+.topnav__btn:last-child {
+  flex-shrink: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Progressive hiding at smaller widths to protect rightmost buttons */
+@media (max-width: 1300px) {
+  .topnav__speed-control { display: none !important; }
+}
+@media (max-width: 1100px) {
+  .topnav__module-badge { display: none !important; }
+}
+@media (max-width: 960px) {
+  .topnav__btn--simulate-global { display: none !important; }
+}
+@media (max-width: 768px) {
+  .topnav__status { display: none !important; }
+}
+
+/* ════════════════════════════════════════════
+   RESTORE: Neo-brutalist TopNav button style
+   ════════════════════════════════════════════ */
+
+/* ── Base reset for ALL nav buttons ── */
+.topnav .topnav__btn,
+.topnav .topnav__hamburger,
+.topnav .topnav__btn--simulate-global,
+.topnav .topnav__btn--why {
+  border: 3px solid var(--border) !important;
+  box-shadow: 3px 3px 0px var(--border) !important;
+  transition: all 0.15s var(--ease-bounce) !important;
+  border-radius: 10px !important;
+  font-weight: 900 !important;
+}
+
+.topnav .topnav__btn:hover,
+.topnav .topnav__hamburger:hover,
+.topnav .topnav__btn--simulate-global:hover {
+  transform: translate(-1px, -1px) !important;
+  box-shadow: 4px 4px 0px var(--border) !important;
+}
+
+.topnav .topnav__btn:active,
+.topnav .topnav__hamburger:active,
+.topnav .topnav__btn--simulate-global:active {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px var(--border) !important;
+}
+
+/* ── MENU hamburger button ── */
+.topnav__hamburger {
+  height: 36px !important;
+  padding: 0 12px !important;
+  border-radius: 10px !important;
+  background: var(--bg-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+}
+
+/* ── SIMULATE REQUEST — yellow outlined pill ── */
+.topnav__btn--simulate-global {
+  border: 3px solid var(--border) !important;
+  border-radius: 20px !important;
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  height: 36px !important;
+  padding: 0 14px !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.topnav__btn--simulate-global:hover {
+  background: var(--accent) !important;
+  color: #000 !important;
+  border-radius: 20px !important;
+}
+
+/* ── RUNNING / IDLE status pill ── */
+.topnav__status {
+  border: 3px solid var(--border) !important;
+  box-shadow: 3px 3px 0px var(--border) !important;
+  border-radius: 20px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: var(--bg-primary) !important;
+  font-weight: 900 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* ── Play / Pause / Skip / Reset — icon buttons ── */
+.topnav__btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+/* Play button when simulation is running → yellow fill */
+.topnav__btn--play[data-state="running"],
+.topnav__btn--play.is-playing,
+.topnav__btn.active {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* ── WHY? — yellow pill when inactive, filled when active ── */
+.topnav__btn--why {
+  width: auto !important;
+  padding: 0 14px !important;
+  border-radius: 20px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  height: 36px !important;
+}
+
+/* ── Pinned right container for SimRequest ── */
+.topnav__pinned-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.topnav__btn--why.active,
+.topnav__btn--why[data-active="true"] {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* WHY pill stays pill on hover */
+.topnav__btn--why:hover {
+  border-radius: 20px !important;
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* ── Speed buttons — grouped with thick outer border ── */
+.topnav__speed-control {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.topnav__speed-label {
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  color: var(--text-tertiary) !important;
+  font-family: var(--font-mono) !important;
+  letter-spacing: 0.08em !important;
+}
+
+.topnav__speed-buttons {
+  display: flex !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 3px 3px 0px var(--border) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: var(--bg-primary) !important;
+  gap: 0 !important;
+  padding: 0 !important;
+}
+
+.topnav__speed-btn {
+  padding: 0 9px !important;
+  height: 30px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: var(--text-tertiary) !important;
+  background: transparent !important;
+  border: none !important;
+  border-right: 2px solid var(--border) !important;
+  cursor: pointer !important;
+  font-family: var(--font-mono) !important;
+  transition: all 0.1s !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.topnav__speed-btn:last-child {
+  border-right: none !important;
+}
+
+.topnav__speed-btn:hover {
+  background: var(--bg-hover) !important;
+  color: var(--text-primary) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.topnav__speed-btn.active {
+  background: var(--accent) !important;
+  color: #000 !important;
+  font-weight: 900 !important;
+}
+
+/* ── Edit + Theme toggle buttons (rightmost) ── */
+.topnav__btn:last-child,
+.topnav__btn--theme,
+.topnav__btn--edit {
+  flex-shrink: 0 !important;
+}
+
+/* ── Separator lines ── */
+.topnav__separator {
+  width: 2px !important;
+  height: 20px !important;
+  background: var(--border) !important;
+  opacity: 0.25 !important;
+  flex-shrink: 0 !important;
+}
+.topnav__btn--simulate-global {
+  border: 2px solid var(--accent) !important;
+  border-radius: 20px !important;
+  background: rgba(255,211,42,.07) !important;
+  color: #8a6a00 !important;
+  font-weight: 900 !important;
+  padding: 0 14px !important;
+  height: 32px !important;
+  display: flex !important; align-items: center !important; gap: 6px !important;
+  transition: all .15s !important;
+}
+[data-theme="dark"] .topnav__btn--simulate-global { color: var(--accent) !important; }
+.topnav__btn--simulate-global:hover { background: var(--accent) !important; color: #000 !important; }
+
+/* ─── Running status dot → ring pulse ─── */
+.topnav__status-dot.running {
+  background: #00B894 !important;
+  animation: status-ring 1.3s ease infinite !important;
+}
+@keyframes status-ring {
+  0%   { box-shadow: 0 0 0 0   rgba(0,184,148,.7); }
+  70%  { box-shadow: 0 0 0 6px rgba(0,184,148,0);  }
+  100% { box-shadow: 0 0 0 0   rgba(0,184,148,0);  }
+}
+
+/* ─── WHY? → pill ─── */
+.topnav__btn--why {
+  width: auto !important; padding: 0 12px !important;
+  border-radius: 20px !important;
+  font-size: 10px !important; font-weight: 900 !important;
+  letter-spacing: .06em !important;
+}
+.topnav__btn--why.active { background: var(--accent) !important; color: #000 !important; }
+
+/* ─── Speed → segmented group ─── */
+.topnav__speed-buttons {
+  display: flex !important; background: var(--bg-tertiary) !important;
+  padding: 2px !important; border-radius: 8px !important;
+  border: 2px solid var(--border) !important; gap: 1px !important;
+}
+.topnav__speed-btn {
+  padding: 2px 7px !important; font-size: 9px !important; font-weight: 800 !important;
+  border-radius: 5px !important; background: transparent !important; border: none !important;
+  color: var(--text-tertiary) !important; cursor: pointer !important;
+  font-family: var(--font-mono) !important; transition: all .1s !important;
+}
+.topnav__speed-btn:hover  { color: var(--text-primary) !important; }
+.topnav__speed-btn.active { background: var(--accent) !important; color: #000 !important; font-weight: 900 !important; }
