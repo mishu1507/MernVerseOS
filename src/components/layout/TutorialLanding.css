@@ -414,6 +414,7 @@
 
     .landing-features {
         flex-direction: column;
+<<<<<<< HEAD
         gap: 8px;
         margin-bottom: 32px;
     }
@@ -569,4 +570,35 @@
     border-right: none;
     padding: 24px 16px;
   }
+=======
+        gap: 12px;
+        margin-bottom: 40px;
+    }
+
+    .feature-pill {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .landing-enter-btn {
+        padding: 16px 32px;
+        font-size: 16px;
+    }
+
+    .tutorial-modal {
+        padding: 20px;
+    }
+
+    .tutorial-modal-icon {
+        font-size: 50px;
+    }
+
+    .tutorial-modal h2 {
+        font-size: 24px;
+    }
+
+    .tutorial-modal p {
+        font-size: 14px;
+    }
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }

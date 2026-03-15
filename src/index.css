@@ -1,27 +1,58 @@
 /* ========================================
    MERNVerse OS — Design System
+<<<<<<< HEAD
+=======
+   ✦ Premium Cartoon Lab ✦
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
    Pale Blue · Vivid Yellow · Bold Ink
    ======================================== */
 
 :root {
+<<<<<<< HEAD
+=======
+  /* — Backgrounds (Pale Daydream) — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --bg-primary: #EEF5FF;
   --bg-secondary: #F8FBFF;
   --bg-tertiary: #E3EEFF;
   --bg-card: #FFFFFF;
   --bg-elevated: #FFFFFF;
+<<<<<<< HEAD
   --bg-hover: #D8E8FF;
   --bg-active: #C8DCFF;
   --border: #2D3436;
   --connection-line: #A2AFB5;
   --border-light: #B2BEC3;
+=======
+  /* — Structural Borders (Static Ink) — */
+  --border: #2D3436;
+  --connection-line: #A2AFB5;
+  /* Soft grey for light mode */
+  /* Bold Dark Border — Always dark for cartoon look */
+  --border-light: #B2BEC3;
+
+  /* — Text (Ink Blue) — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --text-primary: #2D3436;
   --text-secondary: #4A5A60;
   --text-tertiary: #A2AFB5;
   --text-inverse: #EEF5FF;
+<<<<<<< HEAD
   --accent: #FFD32A;
   --accent-hover: #FFEE58;
   --accent-bg: rgba(255, 211, 42, 0.1);
   --accent-border: #2D3436;
+=======
+
+  /* — Accent (Vivid Yellow) — */
+  --accent: #FFD32A;
+  /* Brighter Yellow */
+  --accent-hover: #FFEE58;
+  --accent-bg: rgba(255, 211, 42, 0.1);
+  --accent-border: #2D3436;
+
+  /* — Semantic — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --success: #00B894;
   --success-bg: rgba(0, 184, 148, 0.1);
   --warning: #FAB1A0;
@@ -30,10 +61,20 @@
   --error-bg: rgba(214, 48, 49, 0.1);
   --info: #0984E3;
   --info-bg: rgba(9, 132, 227, 0.1);
+<<<<<<< HEAD
+=======
+
+  /* — Highlight Colors — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --teal: #0097A7;
   --mustard: #FFEAA7;
   --coral: #FF7675;
   --lavender: #A29BFE;
+<<<<<<< HEAD
+=======
+
+  /* — Node categories — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --node-client: #74B9FF;
   --node-server: #55E6C1;
   --node-database: #F9CA24;
@@ -41,29 +82,62 @@
   --node-queue: #FF7675;
   --node-gateway: #D63031;
   --node-service: #55E6C1;
+<<<<<<< HEAD
+=======
+
+  /* — Packet colors — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --packet-http: #0984E3;
   --packet-db: #F0932B;
   --packet-ws: #00B894;
   --packet-queue: #6C5CE7;
+<<<<<<< HEAD
   --shadow-sm: 2px 2px 0px rgba(45, 52, 70, 0.1);
   --shadow-md: 4px 4px 0px rgba(45, 52, 70, 1);
   --shadow-lg: 8px 8px 0px rgba(45, 52, 70, 0.15);
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+=======
+
+  /* — Shadows (Cartoon Pop Depth) — */
+  --shadow-sm: 2px 2px 0px rgba(45, 52, 70, 0.1);
+  --shadow-md: 4px 4px 0px rgba(45, 52, 70, 1);
+  --shadow-lg: 8px 8px 0px rgba(45, 52, 70, 0.15);
+
+  /* — Typography — */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --text-xs: 0.6875rem;
   --text-sm: 0.75rem;
   --text-base: 0.8125rem;
   --text-md: 0.875rem;
   --text-lg: 1rem;
   --text-xl: 1.125rem;
+<<<<<<< HEAD
+=======
+
+  /* — Radii — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
+<<<<<<< HEAD
   --topnav-height: 54px;
   --sidebar-width: 240px;
   --bottom-panel-height: 220px;
+=======
+
+  /* — Layout — */
+  --topnav-height: 54px;
+  --sidebar-width: 240px;
+  --bottom-panel-height: 220px;
+
+  /* — Transitions — */
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration: 180ms;
@@ -77,27 +151,46 @@
   --bg-elevated: #111111;
   --bg-hover: #1A1A1A;
   --bg-active: #222222;
+<<<<<<< HEAD
   --border: #333333;
   --connection-line: #444444;
   --border-light: #222222;
+=======
+
+  --border: #333333;
+  --connection-line: #444444;
+  /* Much more visible in dark mode */
+  /* Premium Charcoal Border */
+  --border-light: #222222;
+
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --text-primary: #FFFFFF;
   --text-secondary: #BDC3C7;
   --text-tertiary: #7F8C8D;
   --text-inverse: #000000;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   --accent: #FFD32A;
   --teal: #81ECEC;
   --shadow-md: 4px 4px 0px rgba(255, 255, 255, 0.05);
 }
 
 /* ═════════ Reset ═════════ */
+<<<<<<< HEAD
 *,
 *::before,
 *::after {
+=======
+* {
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 html {
   overflow: hidden;
   height: 100%;
@@ -110,6 +203,14 @@ body {
   overflow: hidden;
   height: 100vh;
   height: 100dvh;
+=======
+body {
+  font-family: var(--font-ui);
+  background: #111;
+  /* Solid dark contrast background */
+  overflow: hidden;
+  height: 100vh;
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   width: 100vw;
   display: flex;
   align-items: center;
@@ -118,7 +219,10 @@ body {
 
 #root {
   height: calc(100vh - 32px);
+<<<<<<< HEAD
   height: calc(100dvh - 32px);
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
   width: calc(100vw - 32px);
   max-width: 1800px;
   max-height: 1000px;
@@ -126,6 +230,7 @@ body {
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 /* On mobile: fill the entire screen */
 @media (max-width: 768px) {
   body {
@@ -160,6 +265,55 @@ body {
 @keyframes dash-flow {
   0%   { stroke-dashoffset: 24; }
   100% { stroke-dashoffset: 0;  }
+=======
+.text-success {
+  color: var(--success);
+}
+
+.text-error {
+  color: var(--error);
+}
+
+.text-warning {
+  color: var(--warning);
+}
+
+.text-info {
+  color: var(--info);
+}
+
+/* ═════════ Animations ═════════ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 24;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }
 
 button {
@@ -168,6 +322,7 @@ button {
   background: none;
   cursor: pointer;
   outline: none;
+<<<<<<< HEAD
 }
 
 /* ── Mobile global fixes ── */
@@ -190,4 +345,6 @@ html {
     max-height: none;
     max-width: none;
   }
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }

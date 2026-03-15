@@ -299,6 +299,7 @@
     background: rgba(255, 211, 42, 0.1);
 }
 
+<<<<<<< HEAD
 /* ── Empty state (was missing, causing broken layout) ── */
 .sim-canvas__empty {
     position: absolute;
@@ -322,6 +323,9 @@
 
 /* ── Mobile node + packet scaling ── */
 @media (max-width: 640px) {
+=======
+@media (max-width: 600px) {
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     .sim-controls {
         bottom: 12px;
         padding: 6px 12px;
@@ -339,6 +343,7 @@
         /* Hide speed on tiny mobile */
     }
 
+<<<<<<< HEAD
     .system-node__box {
         width: 52px;
         height: 52px;
@@ -351,6 +356,18 @@
     .system-node__label {
         font-size: 9px;
         padding: 1px 5px;
+=======
+    /* Scaling Nodes for Mobile */
+    .system-node__box {
+        width: 54px;
+        height: 54px;
+        font-size: 24px;
+        border-radius: 12px;
+    }
+
+    .system-node__name {
+        font-size: 9px;
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     }
 
     .connection-label {
@@ -360,6 +377,7 @@
     .packet-dot {
         width: 10px;
         height: 10px;
+<<<<<<< HEAD
         border-width: 2px;
     }
 
@@ -593,4 +611,7 @@
 }
 [data-theme="dark"] .sim-canvas {
   background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px) !important;
+=======
+    }
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }

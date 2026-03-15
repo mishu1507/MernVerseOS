@@ -48,6 +48,7 @@ export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanva
         setIsDragging(false);
     };
 
+<<<<<<< HEAD
     const handleTouchStart = (e: React.TouchEvent) => {
         if (e.touches.length !== 1) return;
         setIsDragging(true);
@@ -70,6 +71,8 @@ export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanva
         setIsDragging(false);
     };
 
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     const handleWheel = (e: React.WheelEvent) => {
         setPan(prev => ({
             x: prev.x - e.deltaX,
@@ -100,9 +103,12 @@ export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanva
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onWheel={handleWheel}
+<<<<<<< HEAD
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
         >
             <div
                 className="sim-canvas__grid"
@@ -130,7 +136,10 @@ export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanva
                                 <line
                                     className={`connection-line ${hasActivePacket ? 'connection-line--active' : ''} ${isRunning ? 'connection-line--running' : ''}`}
                                     x1={x1} y1={y1} x2={x2} y2={y2}
+<<<<<<< HEAD
                                     data-protocol={conn.protocol}
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                                 />
                                 <text className="connection-label" x={mx} y={my - 6} textAnchor="middle">
                                     {conn.protocol}
@@ -166,7 +175,10 @@ export default function SimCanvas({ isFullScreen, onToggleFullScreen }: SimCanva
                                 key={pkt.id}
                                 className={`packet-dot packet-dot--${getProtocolClass(pkt.protocol)}`}
                                 style={{ left: x, top: y }}
+<<<<<<< HEAD
                                 data-protocol={pkt.protocol}
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                             >
                                 {pkt.label && <span className="packet-dot__label">{pkt.label}</span>}
                             </div>

@@ -166,6 +166,22 @@ export default function TopNav({
             )}
 
             <div className="topnav__controls">
+<<<<<<< HEAD
+=======
+                {onSimulateRequest && (
+                    <>
+                        <button
+                            className="topnav__btn--simulate-global"
+                            onClick={onSimulateRequest}
+                            title="Simulate Full Request Journey"
+                        >
+                            ⚡ Simulate Request
+                        </button>
+                        <div className="topnav__separator" />
+                    </>
+                )}
+
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                 <div className="topnav__status">
                     <span className={`topnav__status-dot ${isRunning ? 'running' : isPaused ? 'paused' : ''}`} />
                     <span className="topnav__status-text">{isRunning ? 'RUNNING' : isPaused ? 'PAUSED' : 'IDLE'}</span>
@@ -228,6 +244,7 @@ export default function TopNav({
                     {theme === 'dark' ? '☀' : '🌙'}
                 </button>
             </div>
+<<<<<<< HEAD
 
             {onSimulateRequest && (
                 <div className="topnav__pinned-right">
@@ -241,6 +258,8 @@ export default function TopNav({
                     </button>
                 </div>
             )}
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
         </header>
     );
 }

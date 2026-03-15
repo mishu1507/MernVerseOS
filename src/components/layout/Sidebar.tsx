@@ -133,6 +133,7 @@ interface SidebarProps {
     onModuleSelect: (moduleId: string) => void;
     onMissionsClick: () => void;
     showMissions: boolean;
+<<<<<<< HEAD
     onBuildChallengesClick: () => void;
     showBuildChallenges: boolean;
     onClose: () => void;
@@ -146,14 +147,28 @@ export default function Sidebar({
     showBuildChallenges,
     onClose
 }: SidebarProps) {
+=======
+    onClose: () => void;
+}
+
+export default function Sidebar({ onModuleSelect, onMissionsClick, showMissions, onClose }: SidebarProps) {
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     const { snapshot } = useStore();
 
     const handleSelect = (moduleId: string) => {
         onModuleSelect(moduleId);
+<<<<<<< HEAD
+=======
+        onClose();
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     };
 
     const handleMissions = () => {
         onMissionsClick();
+<<<<<<< HEAD
+=======
+        onClose();
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     };
 
     return (
@@ -191,6 +206,7 @@ export default function Sidebar({
             <div className="sidebar__missions-section">
                 <div className="sidebar__section-label">Challenges</div>
                 <button
+<<<<<<< HEAD
                     className={`sidebar__module ${showBuildChallenges ? 'sidebar__module--active' : ''}`}
                     onClick={() => onBuildChallengesClick()}
                 >
@@ -200,6 +216,10 @@ export default function Sidebar({
                 <button
                     className={`sidebar__module sidebar__module--missions ${showMissions ? 'sidebar__module--active' : ''}`}
                     onClick={() => handleMissions()}
+=======
+                    className={`sidebar__module sidebar__module--missions ${showMissions ? 'sidebar__module--active' : ''}`}
+                    onClick={handleMissions}
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                 >
                     <span className="sidebar__module-icon">🎯</span>
                     <span className="sidebar__module-label">System Challenges</span>

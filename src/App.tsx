@@ -9,7 +9,10 @@ import BottomPanel from './components/layout/BottomPanel';
 import TutorialLanding from './components/layout/TutorialLanding';
 import WhyModeOverlay from './components/learning/WhyModeOverlay';
 import MissionPanel from './components/learning/MissionPanel';
+<<<<<<< HEAD
 import BuildChallenge from './challenges/BuildChallenge';
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 import { getEventLoopModuleConfig } from './modules/eventLoop/eventLoopModule';
 import { getExpressModuleConfig } from './modules/express/expressModule';
 import { getMongoModuleConfig } from './modules/mongo/mongoModule';
@@ -24,6 +27,7 @@ import { getIntroModuleConfig } from './modules/intro/introModule';
 import { getStrugglesModuleConfig } from './modules/struggles/strugglesModule';
 import { getWipModuleConfig } from './modules/wip/wipModule';
 import { getFullJourneyModuleConfig } from './modules/fullJourney/fullJourneyModule';
+<<<<<<< HEAD
 import { getReqResModuleConfig } from "./modules/reqRes/reqResModule";
 import { getPromisesModuleConfig } from "./modules/promises/promisesModule";
 import { getCrudModuleConfig } from "./modules/crud/crudModule";
@@ -62,11 +66,14 @@ import { getServerUiStateModuleConfig } from './modules/serverUiState/serverUiMo
 import { getMemoizationModuleConfig } from './modules/memoization/memoModule';
 import { getLazyLoadingModuleConfig } from './modules/lazyLoading/lazyModule';
 import { getCodeSplittingModuleConfig } from './modules/codeSplitting/codeSplitModule';
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 import './App.css';
 
 type ModuleConfigFn = () => ReturnType<typeof getEventLoopModuleConfig>;
 
 const MODULE_CONFIGS: Record<string, ModuleConfigFn> = {
+<<<<<<< HEAD
     // ── Section 1: Basics ────────────────────────────────────
     'intro':             getIntroModuleConfig,
     'req-res':           getReqResModuleConfig,
@@ -127,6 +134,20 @@ const MODULE_CONFIGS: Record<string, ModuleConfigFn> = {
     'caching':           getCachingModuleConfig,
     'message-queues':    getMessageQueueModuleConfig,
     'load-balancing':    getLoadBalancingModuleConfig,
+=======
+    'intro': getIntroModuleConfig,
+    'struggles': getStrugglesModuleConfig,
+    'event-loop': getEventLoopModuleConfig,
+    'express': getExpressModuleConfig,
+    'mongodb': getMongoModuleConfig,
+    'react': getReactModuleConfig,
+    'auth': getAuthModuleConfig,
+    'websockets': getWebSocketModuleConfig,
+    'caching': getCachingModuleConfig,
+    'microservices': getMicroservicesModuleConfig,
+    'graphql': getGraphQLModuleConfig,
+    'indexing': getIndexingModuleConfig,
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 };
 
 /* ─── Reusable resize hook ─── */
@@ -171,7 +192,10 @@ function useResize(axis: 'x' | 'y', initial: number, min: number, max: number, i
 function AppContent() {
     const [theme, setTheme] = useState('light');
     const [showMissions, setShowMissions] = useState(false);
+<<<<<<< HEAD
     const [showBuildChallenges, setShowBuildChallenges] = useState(false);
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [tutorialCompleted, setTutorialCompleted] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
@@ -210,7 +234,10 @@ function AppContent() {
 
     const handleModuleSelect = useCallback((moduleId: string) => {
         setShowMissions(false);
+<<<<<<< HEAD
         setShowBuildChallenges(false);
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
         // On mobile, close sidebar after selection
         if (window.innerWidth < 1024) {
             setIsSidebarOpen(false);
@@ -226,6 +253,7 @@ function AppContent() {
 
     const handleMissionsClick = useCallback(() => {
         setShowMissions(true);
+<<<<<<< HEAD
         setShowBuildChallenges(false);
         if (window.innerWidth < 1024) {
             setIsSidebarOpen(false);
@@ -235,6 +263,8 @@ function AppContent() {
     const handleBuildChallengesClick = useCallback(() => {
         setShowBuildChallenges(true);
         setShowMissions(false);
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
         if (window.innerWidth < 1024) {
             setIsSidebarOpen(false);
         }
@@ -260,12 +290,16 @@ function AppContent() {
                         onModuleSelect={handleModuleSelect}
                         onMissionsClick={handleMissionsClick}
                         showMissions={showMissions}
+<<<<<<< HEAD
                         onBuildChallengesClick={handleBuildChallengesClick}
                         showBuildChallenges={showBuildChallenges}
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                         onClose={() => setIsSidebarOpen(false)}
                     />
                 )}
                 <div className="app__center">
+<<<<<<< HEAD
                     {showBuildChallenges ? (
                         <div className="app__challenge-fullarea">
                             <BuildChallenge />
@@ -290,6 +324,24 @@ function AppContent() {
                 </div>
                 {/* ─── Vertical resize bar (right panel) ─── */}
                 {!isFullScreen && !showBuildChallenges && (
+=======
+                    <div className="app__canvas-wrapper">
+                        <SimCanvas isFullScreen={isFullScreen} onToggleFullScreen={() => setIsFullScreen(!isFullScreen)} />
+                        <WhyModeOverlay />
+                    </div>
+                    {/* ─── Horizontal resize bar (bottom panel) ─── */}
+                    {!isFullScreen && (
+                        <div className="bottom-panel-container" style={{ height: window.innerWidth < 900 ? 'auto' : bottomPanel.size }}>
+                            <div className="resize-bar resize-bar--horizontal" onMouseDown={bottomPanel.onMouseDown}>
+                                <div className="resize-bar__grip" />
+                            </div>
+                            <BottomPanel height="100%" />
+                        </div>
+                    )}
+                </div>
+                {/* ─── Vertical resize bar (right panel) ─── */}
+                {!isFullScreen && (
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
                     <>
                         <div className="resize-bar resize-bar--vertical" onMouseDown={rightPanel.onMouseDown}>
                             <div className="resize-bar__grip" />

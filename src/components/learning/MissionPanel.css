@@ -60,6 +60,7 @@
     }
 }
 
+<<<<<<< HEAD
 .mission-panel__empty {
     display: flex;
     flex-direction: column;
@@ -86,6 +87,8 @@
     font-size: 14px;
 }
 
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 /* ---- Header ---- */
 
 .mission-panel__header {
@@ -591,6 +594,7 @@
     background: var(--success);
     color: var(--bg-card);
     border-color: var(--success);
+<<<<<<< HEAD
 }
 
 /* ── Mission panel mobile ── */
@@ -631,4 +635,6 @@
   .mission-panel__option-text {
     font-size: 12px;
   }
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }

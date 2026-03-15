@@ -150,6 +150,7 @@
     font-weight: 500;
 }
 
+<<<<<<< HEAD
 @media (max-width: 900px) {
     .bottom-panel__tabs {
         padding: 0 6px;
@@ -163,11 +164,18 @@
         padding: 8px 8px;
         font-size: 9px;
         flex-shrink: 0;
+=======
+@media (max-width: 768px) {
+    .bottom-panel__tab {
+        padding: 10px 8px;
+        font-size: 10px;
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     }
 
     .bottom-panel__tab-count {
         display: none;
     }
+<<<<<<< HEAD
 
     .bottom-panel__content {
         font-size: 10px;
@@ -180,6 +188,8 @@
         padding: 6px 5px;
         font-size: 8px;
     }
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }
 
 /* Custom Cartoon Scrollbar for logs */
@@ -201,6 +211,7 @@
 
 .bottom-panel__content::-webkit-scrollbar-thumb:hover {
     background: var(--accent-hover);
+<<<<<<< HEAD
 }
 
 /* ── Bottom panel mobile ── */
@@ -282,4 +293,6 @@
   background: rgba(255,211,42,.04) !important;
   padding-left: 10px !important;
   border-radius: 0 5px 5px 0 !important;
+=======
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }

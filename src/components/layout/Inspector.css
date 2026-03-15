@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+<<<<<<< HEAD
     min-height: 0;
 }
 
@@ -24,6 +25,21 @@
 
 .inspector__title {
     font-size: 12px;
+=======
+}
+
+.inspector__header {
+    padding: 12px 16px;
+    border-bottom: 4px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inspector__title {
+    font-size: 13px;
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
     font-weight: 800;
     color: var(--text-primary);
     text-transform: uppercase;
@@ -33,13 +49,20 @@
 .inspector__tabs {
     display: flex;
     background: var(--bg-primary);
+<<<<<<< HEAD
     padding: 3px;
     border-radius: 10px;
     border: 2px solid var(--border);
+=======
+    padding: 4px;
+    border-radius: 12px;
+    border: 3px solid var(--border);
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }
 
 .inspector__tab {
     flex: 1;
+<<<<<<< HEAD
     padding: 5px;
     font-size: 9px;
     font-weight: 900;
@@ -50,6 +73,16 @@
     cursor: pointer;
     border: none;
     background: transparent;
+=======
+    padding: 6px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: var(--text-tertiary);
+    cursor: pointer;
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 }
 
 .inspector__tab--active {
@@ -62,6 +95,7 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
+<<<<<<< HEAD
     padding: 12px;
     min-height: 0;
     overscroll-behavior: contain;
@@ -103,6 +137,15 @@
         margin-bottom: 0;
     }
 }
+=======
+    padding: 16px;
+    min-height: 0;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    /* Simplest scroll layout: block items */
+}
+
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
 .inspector__section {
     margin-bottom: 24px;
 }
@@ -408,6 +451,7 @@
     border: 2px dashed var(--border);
     border-radius: 12px;
     color: var(--text-tertiary);
+<<<<<<< HEAD
 }
 
 /* ── Inspector mobile drawer ── */
@@ -536,3 +580,6 @@
 .learning-story__analogy  { animation: card-in .25s var(--ease-bounce) .10s both !important; }
 .learning-story__simulator{ animation: card-in .25s var(--ease-bounce) .15s both !important; }
 @keyframes card-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+=======
+}
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1

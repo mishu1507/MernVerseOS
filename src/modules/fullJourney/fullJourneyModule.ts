@@ -8,7 +8,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '👆',
             category: 'client',
             runtime: 'reactive',
+<<<<<<< HEAD
             position: { x: 100, y: 200 },
+=======
+            position: { x: 100, y: 150 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "User Event", "Layer": "React Component" },
             explanation: "User clicks a button. React triggers an event handler."
@@ -19,7 +23,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🌐',
             category: 'client',
             runtime: 'event-loop',
+<<<<<<< HEAD
             position: { x: 300, y: 200 },
+=======
+            position: { x: 300, y: 150 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "Network Request", "API": "fetch()" },
             explanation: "The browser's fetch API initiates an HTTP request."
@@ -30,7 +38,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🚪',
             category: 'gateway',
             runtime: 'event-loop',
+<<<<<<< HEAD
             position: { x: 500, y: 200 },
+=======
+            position: { x: 300, y: 350 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "Reverse Proxy", "Tech": "Nginx / Node" },
             explanation: "Traffic enters the server and is directed to Express."
@@ -41,7 +53,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🚥',
             category: 'service',
             runtime: 'event-loop',
+<<<<<<< HEAD
             position: { x: 700, y: 200 },
+=======
+            position: { x: 500, y: 350 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "Middleware", "Tech": "cors, json" },
             explanation: "Express validates the request, checks tokens, and parses JSON."
@@ -52,7 +68,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🧠',
             category: 'service',
             runtime: 'event-loop',
+<<<<<<< HEAD
             position: { x: 900, y: 200 },
+=======
+            position: { x: 700, y: 350 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "Route Handler", "Logic": "Business Rules" },
             explanation: "Business logic executes and initiates a database query."
@@ -63,7 +83,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🍃',
             category: 'database',
             runtime: 'blocking',
+<<<<<<< HEAD
             position: { x: 900, y: 400 },
+=======
+            position: { x: 700, y: 550 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "NoSQL Operation", "Tech": "Mongoose" },
             explanation: "Mongoose sends the command to MongoDB."
@@ -74,7 +98,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '🗂️',
             category: 'database',
             runtime: 'blocking',
+<<<<<<< HEAD
             position: { x: 1100, y: 400 },
+=======
+            position: { x: 900, y: 550 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "B-Tree Search", "Outcome": "O(log n)" },
             explanation: "MongoDB uses an index to locate the document instantly."
@@ -85,7 +113,11 @@ export function getFullJourneyModuleConfig(): ModuleConfig {
             icon: '⚛️',
             category: 'client',
             runtime: 'reactive',
+<<<<<<< HEAD
             position: { x: 100, y: 400 },
+=======
+            position: { x: 100, y: 350 },
+>>>>>>> 4ab21cbb75eeb8440e220add363f45a6bafa73e1
             state: 'idle',
             metadata: { "Type": "Virtual DOM", "Phase": "Commit" },
             explanation: "React receives the JSON response, updates state, and reconciles the DOM."
